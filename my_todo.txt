@@ -1,0 +1,40 @@
+<May 7>
+
+    * Tried to extract data from Json / CSV file from 
+    https://data.sfgov.org/Culture-and-Recreation/Recreation-Park-Department-Park-Info-Dataset/z76i-7s65/data
+
+    * Data Modelling was done (Many to Many ~~~~ users, parks, ratings....as well associate tables like favorites)
+
+<May 8>
+
+	* Worked on seed.py - feed data to database
+	* Started with server side and render template
+
+BLOCK:
+
+	#### Should I use my database or use google map api for finding nearest parks#### ~~~~~~ Answer: Since I have a latitude and a longitude i can use Google Map Api
+
+	#### Should I use dataSfgov API for park locations as well to show up in the map#### ~~~~~ Answer: Later, because I have started with it already.
+
+	#### Can I use my data on latitude and logitude and show up in the map #### ~~~~~~~~~~ Answer: Sure. 
+
+<May 9>
+
+To Do:
+
+>>>>>>> Edit my csv file to have seperate latitude and longitude columns ----- Status : SUCCESS
+
+>>>>>>> create a dummy file and check if you can retrieve all columns perfectly and then insert the file into load_parks function in the seed_db file ---- Status: SUCCESS
+
+>>>>>>> Seed data into database and have a park table with all datas ---- Status: SUCCESS
+
+>>>>>>>> Work server side to show up park location when an user types in a zipcode
+
+Reference: 
+
+for maps, https://dev.socrata.com/blog/2014/05/31/google-maps.html
+
+for json data, https://dev.socrata.com/foundry/data.sfgov.org/94uf-amnx
+
+
+

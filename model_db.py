@@ -2,6 +2,8 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.mysql import DOUBLE
+
 
   # Connection to PostGreSQL through Flask-SQLAlchemy helper Library
 
@@ -45,6 +47,8 @@ class Park(db.Model):
     manager = db.Column(db.String(75),nullable=False)
     email = db.Column(db.String(100),nullable=False)
     phone = db.Column(db.String(25),nullable=True)
+    latitude = db.Column(db.Float,nullable=False)
+    longitude = db.Column(db.Float,nullable=False)
 
 
 

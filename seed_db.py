@@ -9,7 +9,8 @@ from model_db import Favorite
 from model_db import connect_to_db,db
 import csv
 
-# from server import app
+
+from server import app
 
 
 def load_parks():
@@ -20,19 +21,19 @@ def load_parks():
 
 	with open('park_Info.csv','rb') as csvfile:
 
-		park_records = csv.DictReader(csvfile)
+		park_records = csv.reader(csvfile)
 		
 
 		for row in park_records:
-			parkname=row['ParkName']
-			manager = row['Manager']
-			email = row['Email']
-			phone = row['Phone']
-			zipcode = row['zipcode']
-			location = row['Location']
+			parkname,manager,email,phone,zipcode,address,latitude,longitude = row
+			if latitude =='' and longitude =='':
+				latitude = None
+				longitude = None
 
 
-			park = Park(park_id=park_id, parkname=parkname,manager=manager,email=email,phone=phone,zipcode=zipcode,location=location)
+
+
+			park = Park(parkname=parkname,manager=manager,email=email,phone=phone,zipcode=zipcode,location=address,latitude = latitude,longitude = longitude)
 
 
 			db.session.add(park)
@@ -56,11 +57,11 @@ def set_val_user_id():
 
 if __name__ == '__main__':
 
-	connect_to_db(app)
+	connect_to_db(app) 
 
 	# Create table if table haven't been created
 	db.create_all()
 
 	load_parks()
-	set_val_user_id()
+	# set_val_user_id()
 
