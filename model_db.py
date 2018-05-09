@@ -1,6 +1,6 @@
  ##############""" Models and Database creation Functions for Park N Play Project"""
 
-from flask_sqlalchemy import SQLALCHEMY
+from flask_sqlalchemy import SQLAlchemy
 
   # Connection to PostGreSQL through Flask-SQLAlchemy helper Library
 
@@ -39,7 +39,7 @@ class Park(db.Model):
 
     park_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     parkname = db.Column(db.String(50),nullable=False)
-    location = db.column(db.String(175),nullable=True)
+    location = db.Column(db.String(175),nullable=True)
     zipcode = db.Column(db.Integer,nullable=False)
     manager = db.Column(db.String(75),nullable=False)
     email = db.Column(db.String(100),nullable=False)
@@ -94,6 +94,37 @@ class Favorite(db.Model):
                                                                                     self.park_id,
                                                                                     self.user_id,
                                                                                     self.is_favorite)
+
+        ##############################################################################################################
+# Helper functions
+
+def connect_to_db(app):
+    """Connect the database to our Flask app"""
+
+    #configuration for using PostgreSQL database
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///childrenparks'
+    # Logs all information issued to stderr useful for debugging
+    app.config['SQLALCHEMY_ECHO'] = True
+    # Tracks all modifications of objects but consumes memory set false
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+
+
+if __name__ == '__main__':
+
+    #Help work with database directly
+
+    from server import app
+    connect_to_db(app)
+    print "Connected to db"
+
+
+
+
+
+
+
 
 
 
