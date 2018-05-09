@@ -62,4 +62,5 @@ if __name__ == '__main__':
 	db.create_all()
 
 	load_parks()
+	set_val_user_id()
 

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Parks</h3>
+
+<ul>
+	{% for park in parks %}
+	<li> {{ park.parkname }}</li>
+
+</ul>
+
+{% endblock %}
