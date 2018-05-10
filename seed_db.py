@@ -26,13 +26,6 @@ def load_parks():
 
 		for row in park_records:
 			parkname,manager,email,phone,zipcode,address,latitude,longitude = row
-			if latitude =='' and longitude =='':
-				latitude = None
-				longitude = None
-
-
-
-
 			park = Park(parkname=parkname,manager=manager,email=email,phone=phone,zipcode=zipcode,location=address,latitude = latitude,longitude = longitude)
 
 

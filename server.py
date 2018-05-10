@@ -22,7 +22,7 @@ app.jinja_env.undefined = StrictUndefined
 def index():
 	"""Homepage"""
 
-	return render_template('homepage.html')
+	return render_template("homepage.html")
 
 @app.route('/parks')
 def parks_list():
@@ -30,7 +30,17 @@ def parks_list():
 
 	parks = Park.query.order_by(Park.parkname).all()
 
-	return render_template('parks_list.html', parks=parks)
+	return render_template("parks_list.html", parks=parks)
+
+
+@app.route('/locatepark')
+def locate_park():
+	""" Locate a park when user types in a zip code """
+
+	zipcode = int(request.args.get("zipcode"))
+	locate_park = Park.query.filter(Park.zipcode == zipcode).all()
+
+	return render_template("locate_park.html",locatepark=locate_park)
 
 
 

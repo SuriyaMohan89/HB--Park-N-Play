@@ -28,7 +28,7 @@ To Do:
 
 >>>>>>> Seed data into database and have a park table with all datas ---- Status: SUCCESS
 
->>>>>>>> Work server side to show up park location when an user types in a zipcode
+>>>>>>>> Work server side to show up park location when an user types in a zipcode ----- Status: SUCCESS
 
 Reference: 
 

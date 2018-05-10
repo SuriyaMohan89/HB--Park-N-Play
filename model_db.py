@@ -2,7 +2,7 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.dialects.mysql import DOUBLE
+
 
 
   # Connection to PostGreSQL through Flask-SQLAlchemy helper Library
