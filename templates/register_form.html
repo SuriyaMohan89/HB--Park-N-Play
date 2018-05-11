@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="/register", method='POST'>
+	<label>Enter valid username</label>
+	<input type="text" name="username"><br><br>
+	
+	<label>Enter valid email</label>
+	<input type="text" name="email"><br><br>
+
+	<label>Enter password </label>
+	<input type="password" name="password" pattern=".{6,}"><br><br>
+
+	<label>Enter your zipcode </label>
+	<input type="text" name="zipcode"><br><br>
+
+	<input type="submit" value="submit">
+
+</form>
+
+{% endblock %}
+

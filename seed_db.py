@@ -13,6 +13,17 @@ import csv
 from server import app
 
 
+def load_users():
+	"""Load users to the databse"""
+
+	User.query.delete()
+	print 'users deleted'
+
+	user = User('username','email','password','zipcode')
+	db.session.add(user)
+	db.session.commit()
+
+
 def load_parks():
 	"""Load parks from park_data into database"""
 
@@ -31,6 +42,16 @@ def load_parks():
 
 			db.session.add(park)
 
+	db.session.commit() 
+
+
+def load_ratings():
+	"""Load ratings into database"""
+	Rating.query.delete()
+
+	rating= Rating(cleanliness_score=cleanliness_score, equipment_score=equipment_score,overall_score=overall_score)
+
+	db.session.add(rating)
 	db.session.commit() 
 
 
@@ -55,6 +76,8 @@ if __name__ == '__main__':
 	# Create table if table haven't been created
 	db.create_all()
 
+	# load_users()
 	load_parks()
+	# load_ratings()
 	# set_val_user_id()
 

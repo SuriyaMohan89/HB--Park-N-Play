@@ -67,7 +67,15 @@ class Rating(db.Model):
     rating_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
-    score = db.Column(db.Integer,nullable=False)
+    cleanliness_score = db.Column(db.Integer,nullable=False)
+    equipment_score = db.Column(db.Integer,nullable=False)
+    overall_score = db.Column(db.Integer,nullable=False)
+
+    user = db.relationship("User",backref=db.backref("scores",order_by=rating_id))
+    park = db.relationship("Park",backref=db.backref("scores",order_by=rating_id))
+
+    
+
 
 
     def __repr__(self):
@@ -89,6 +97,11 @@ class Favorite(db.Model):
     park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
     is_favorite =db.Column(db.Boolean, default = False) 
+
+    user = db.relationship("User",backref=db.backref("favorites",order_by=favorite_id))
+    park = db.relationship("Park",backref=db.backref("favorites",order_by=favorite_id))
+
+
 
 
     

@@ -37,4 +37,12 @@ for maps, https://dev.socrata.com/blog/2014/05/31/google-maps.html
 for json data, https://dev.socrata.com/foundry/data.sfgov.org/94uf-amnx
 
 
+<May 10>
+
+>>>>>> Create a registration form for new users --------- Status: SUCCESS
+
+>>>>>>> View map function with embedded map for corresponding location
+
+
+
 

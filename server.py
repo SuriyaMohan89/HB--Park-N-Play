@@ -24,6 +24,32 @@ def index():
 
 	return render_template("homepage.html")
 
+@app.route('/register',methods=['GET'])
+def register_form():
+	"""Show user registration form"""
+
+	return render_template('register_form.html')
+
+@app.route('/register',methods=['POST'])
+def register_process():
+	"""Process user registration and Registers new user in the database"""
+
+	username = request.form.get('username')
+	email=request.form.get('email')
+	password= request.form.get('password')
+	zipcode = int(request.form.get('zipcode'))
+
+	# session['username'] = username
+	# if (User.query.filter(User.username == session[username])):
+	# 	flash("Account already exists. Try Login")
+	# else:
+	user=User(username=username,email=email,password=password,zipcode=zipcode)
+	db.session.add(user)
+	db.session.commit()
+	flash('Successfully Registered')
+	
+	return redirect('/')
+
 @app.route('/parks')
 def parks_list():
 	"""Displays list of parks in San Francisco"""
@@ -41,6 +67,18 @@ def locate_park():
 	locate_park = Park.query.filter(Park.zipcode == zipcode).all()
 
 	return render_template("locate_park.html",locatepark=locate_park)
+
+
+@app.route('/<int:park_id>' )
+def view_map_park(park_id):
+	"""View map of park selected by user"""
+	
+	print park_id
+	park = Park.query.get(park_id)
+	print '~~~~~~~~~~'
+
+
+	return render_template("view_map.html",park=park)
 
 
 

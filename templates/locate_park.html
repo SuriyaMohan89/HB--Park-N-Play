@@ -3,11 +3,35 @@
 {% block title %}Locate Park {% endblock %}
 
 {% block content %}
+<div class="locate">
 	<ul>
 		{% for park in locatepark %}<br>
-		<li> {{ park.parkname}} {{ park.location }} </li>
+		<li > {{ park.parkname}} {{ park.location }}
+
+			<a href= {{ park.park_id }}> View Map </a>
+		 </li>
 		{% endfor %}
 	</ul>
+</div>
 
 
+
+
+<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+	<script>
+		"use strict";
+
+		let clickbutton = document.querySelector('.viewmap');
+		clickbutton.addEventListener('click',function(){
+	
+		let locate = {lat: park.latitude, lng: park.longitude};
+		let map = new google.maps.Map(document.querySelector('#map'),{
+			center : locate,
+			zoom:8,})
+	});
+
+
+	 </script>
+ -->
 {% endblock %}

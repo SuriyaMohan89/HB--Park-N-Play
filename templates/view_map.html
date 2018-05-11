@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="map"></div>
+
+	<style type="text/css">
+		html, body { height: 100%; margin: 0; padding: 0; }
+		#map { height: 100%; }
+	</style>
+
+	<script src="https://maps.googleapis.com/maps/api/	js?v=3.exp&libraries=places"></script>
+
+	<input id="lat" type="hidden" value = {{ park.latitude| float }}>
+	<input id="long" type="hidden" value= {{ park.longitude | float}}>
+
+	 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<script>
+		"use strict";
+
+		let latitude = $('#lat').data('park.latitude');
+		let longitude = $('#long').data('park.longitude');
+	
+		let locate = {lat:latitude, lng:longitude};
+		let map = new google.maps.Map(document.querySelector('#map'),{
+			center : locate,
+			zoom:8,});
+
+
+	 </script>
+
+	 {% endblock %}
