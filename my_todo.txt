@@ -41,7 +41,18 @@ for json data, https://dev.socrata.com/foundry/data.sfgov.org/94uf-amnx
 
 >>>>>> Create a registration form for new users --------- Status: SUCCESS
 
->>>>>>> View map function with embedded map for corresponding location
+>>>>>>> View map function with embedded map for corresponding location------ Status: Partially Done
+
+<May 11>
+
+>>>>>> Embedd map ----- Status: SUCCESS
+>>>>>> If doubt in Ajax refer to https://codehandbook.org/python-flask-jquery-ajax-post/
+
+HomeWork To Be Done:
+
+@@@ Hacker Rank
+@@@ Think about how to schedule event
+@@@ Think about main functionality
 
 
 
