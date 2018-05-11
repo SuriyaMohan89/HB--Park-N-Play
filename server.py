@@ -75,8 +75,6 @@ def view_map_park(park_id):
 	
 	print park_id
 	park = Park.query.get(park_id)
-	print '~~~~~~~~~~'
-
 
 	return render_template("view_map.html",park=park)
 

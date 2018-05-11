@@ -8,23 +8,38 @@
 		#map { height: 100%; }
 	</style>
 
-	<script src="https://maps.googleapis.com/maps/api/	js?v=3.exp&libraries=places"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA36jAyNnRFdeH8dWD_yaqNHqXQq7wVcWo">
+     </script>
 
 	<input id="lat" type="hidden" value = {{ park.latitude| float }}>
-	<input id="long" type="hidden" value= {{ park.longitude | float}}>
+	<input id="lng" type="hidden" value= {{ park.longitude | float}}>
+
+	<input id="parkname" type="hidden" value={{ park.parkname }}>
 
 	 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 	<script>
 		"use strict";
 
-		let latitude = $('#lat').data('park.latitude');
-		let longitude = $('#long').data('park.longitude');
+		let latitude = parseFloat(document.getElementById("lat").value);
+		let longitude = parseFloat(document.getElementById("lng").value);
+		let centerObject = new google.maps.LatLng(latitude, longitude);
+		let name = document.getElementById("parkname").value;
+		console.log(name)
+		console.log(latitude)
+		console.log(longitude)
 	
-		let locate = {lat:latitude, lng:longitude};
 		let map = new google.maps.Map(document.querySelector('#map'),{
-			center : locate,
-			zoom:8,});
+			center : centerObject,
+			zoom:13,
+			mapTypeId: 'roadmap'
+		});
+
+		var marker = new google.maps.Marker({
+          position: centerObject,
+          map: map,
+          title: name
+        });
 
 
 	 </script>
