@@ -17,8 +17,19 @@
 
 
 <form action="/register">
-	<input type="submit" value="Register">
+	<input type="submit" value="Sign Up Here">
 </form>
+
+{% if session %}
+<form action="/logout">
+	<input type="submit" value="Logout">
+</form>
+
+{% else %}
+<form action="/login">
+	<input type="submit" value="Login">
+</form>
+{% endif %}
 
 
 {% endblock %}
