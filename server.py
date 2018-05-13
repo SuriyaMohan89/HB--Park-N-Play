@@ -99,7 +99,7 @@ def locate_park():
 	if not locate_park:
 		flash('park not found in zipcode')
 		n=1;
-		while(n<=2):
+		while(n<=3):
 			zip_less = zipcode -n;
 			zip_add = zipcode+n;
 			locate_1 = Park.query.filter(Park.zipcode == zip_less).all()
