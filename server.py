@@ -85,7 +85,7 @@ def logout():
 def parks_list():
 	"""Displays list of parks in San Francisco"""
 
-	parks = Park.query.order_by(Park.parkname).all()
+	parks = Park.query.order_by(Park.zipcode).all()
 
 	return render_template("parks_list.html", parks=parks)
 
@@ -110,7 +110,11 @@ def locate_park():
 				zipcode_list.append(locate_2)
 			n+=1
 		print zipcode_list
-		return render_template("locate_park.html",zipcode_list=zipcode_list,locatepark=None)
+		if zipcode_list:
+			return render_template("locate_park.html",zipcode_list=zipcode_list,locatepark=None)
+		else:
+			flash(" park not found in neighbourhood. Try looking list of parks")
+			return redirect("/")
 	if locate_park:
 		return render_template("locate_park.html",locatepark=locate_park)
 
@@ -121,8 +125,13 @@ def view_map_park(park_id):
 	
 	print park_id
 	park = Park.query.get(park_id)
+	print park
 
 	return render_template("view_map.html",park=park)
+
+# @app.route('/ratings')
+# def rate_park():
+# 	""" Rate a park. """
 
 
 

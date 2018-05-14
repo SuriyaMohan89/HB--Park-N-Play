@@ -4,6 +4,16 @@
 
 {% block content %}
 
+<h2> Locate Park </h2>
+<form action="/locatepark">
+	<label> Please Enter Zipcode </label>
+	<input type = "text" name = "zipcode" pattern="[0-9]{5}">
+	<br>
+	<br>
+	<input type="submit"  value = "submit">
+</form><br><br>
+
+
 <h3>Parks</h3>
 
 <ul>
@@ -13,5 +23,8 @@
 	{% endfor %}
 
 </ul>
+
+
+
 
 {% endblock %}

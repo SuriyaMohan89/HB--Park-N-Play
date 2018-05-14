@@ -54,6 +54,14 @@ HomeWork To Be Done:
 @@@ Think about how to schedule event
 @@@ Think about main functionality
 
+<May 14>
+
+>>>>> Think about functionality - schedule
+
+>>>>> Populate parks in same map
+>>>>> Add ratings 
+>>>>> Add Favorites
+
 
 
 
