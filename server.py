@@ -111,15 +111,41 @@ def locate_park():
 			n+=1
 		print zipcode_list
 		if zipcode_list:
+			session["zipcode_list"] = zipcode_list
 			return render_template("locate_park.html",zipcode_list=zipcode_list,locatepark=None)
 		else:
 			flash(" park not found in neighbourhood. Try looking list of parks")
 			return redirect("/")
 	if locate_park:
+		session["locate_park"] = locate_park
 		return render_template("locate_park.html",locatepark=locate_park)
 
 
-@app.route('/<int:park_id>' )
+app.route('/locatepark')
+def latlng_map():
+	""" Having Multiple markers of the park list found in zipcode"""
+
+	all_latlng = []
+	if session["locate_park"]:
+		for location in locate_park:
+			latlng = {
+			"lat"  : location.latitude,
+			"lng"  : location.longitude,
+			"name": location.parkname 
+			}
+			all_latlng.append(latlng)
+	if session["zipcode_list"]:
+		for location in zipcode_list:
+			latlng = {
+			"lat"  : location.latitude,
+			"lng"  : location.longitude,
+			"name": location.parkname 
+			}
+			all_latlng.append(latlng)
+	return jsonify({'coordinates' : all_latlng})
+
+
+@app.route('/<int:park_id>')
 def view_map_park(park_id):
 	"""View map of park selected by user"""
 	
@@ -128,6 +154,8 @@ def view_map_park(park_id):
 	print park
 
 	return render_template("view_map.html",park=park)
+
+
 
 # @app.route('/ratings')
 # def rate_park():

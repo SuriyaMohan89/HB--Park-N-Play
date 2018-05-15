@@ -3,7 +3,6 @@
 {% block title %}Locate Park {% endblock %}
 
 {% block content %}
-<div class="locate">
 	<ul>
 		{% if locatepark %}
 		{% for park in locatepark %}<br>
@@ -26,9 +25,50 @@
 
 
 	</ul>
+	<div id="map"></div>
+
+	<style type="text/css">
+		html, body { height: 100%; margin: 0; padding: 0; }
+		#map { height: 100%; }
+	</style>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA36jAyNnRFdeH8dWD_yaqNHqXQq7wVcWo">
+     </script>
+	<script>
+		"use strict";
+
+		let parkList = [];
+		fetch('/locate_park')
+		.then(function(response){
+			return response.text(); 
+		}).then(function(result) {
+			let mapattr = JSON.parse(result);
+			let mapCoordinates = {};
+			let coordinates = mapattr.coordinates;
+			let length = coordinates.length;
+			for (let i =0; i<1; i++) {
+				mapCoordinates = {
+					position: {
+						lat: parseFloat(mapattr.coordinates[i].lat),
+						lng : parseFloat(mapattr.coordinates[i].lng)						
+					},
+					title : mapattr.coordinates[i].name,
+				};
+			parkList.push(mapCoordinates);
+			}
+			parkList.forEach(function(element) {
+				let marker = new google.maps.Marker ({
+					position : element.position,
+					title : element.name,
+					map: map
+				});
+			});
+		});
+		
+	</script>
 
 
-</div>
+
 
 
 
