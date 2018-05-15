@@ -7,6 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model_db import User,Park,Rating,Favorite, connect_to_db,db
 from sqlalchemy import update
+# from flask import jsonify 
 
 
 app = Flask(__name__)
@@ -97,6 +98,7 @@ def locate_park():
 	zipcode = int(request.args.get("zipcode"))
 	locate_park = Park.query.filter(Park.zipcode == zipcode).all()
 	if not locate_park:
+		# import pdb; pdb.set_trace()
 		flash('park not found in zipcode')
 		n=1;
 		while(n<=3):
@@ -111,38 +113,39 @@ def locate_park():
 			n+=1
 		print zipcode_list
 		if zipcode_list:
-			session["zipcode_list"] = zipcode_list
+			# session["zipcode_list"] = zipcode_list
 			return render_template("locate_park.html",zipcode_list=zipcode_list,locatepark=None)
 		else:
 			flash(" park not found in neighbourhood. Try looking list of parks")
 			return redirect("/")
 	if locate_park:
-		session["locate_park"] = locate_park
+		# import pdb; pdb.set_trace()
+		# session["locate_park"] = locate_park
 		return render_template("locate_park.html",locatepark=locate_park)
 
 
-app.route('/locatepark')
-def latlng_map():
-	""" Having Multiple markers of the park list found in zipcode"""
+# app.route('/locatepark.json')
+# def latlng_map():
+# 	""" Having Multiple markers of the park list found in zipcode"""
 
-	all_latlng = []
-	if session["locate_park"]:
-		for location in locate_park:
-			latlng = {
-			"lat"  : location.latitude,
-			"lng"  : location.longitude,
-			"name": location.parkname 
-			}
-			all_latlng.append(latlng)
-	if session["zipcode_list"]:
-		for location in zipcode_list:
-			latlng = {
-			"lat"  : location.latitude,
-			"lng"  : location.longitude,
-			"name": location.parkname 
-			}
-			all_latlng.append(latlng)
-	return jsonify({'coordinates' : all_latlng})
+# 	all_latlng = []
+# 	if session["locate_park"]:
+# 		for location in locate_park:
+# 			latlng = {
+# 			"lat"  : location.latitude,
+# 			"lng"  : location.longitude,
+# 			"name": location.parkname 
+# 			}
+# 			all_latlng.append(latlng)
+# 	if session["zipcode_list"]:
+# 		for location in zipcode_list:
+# 			latlng = {
+# 			"lat"  : location.latitude,
+# 			"lng"  : location.longitude,
+# 			"name": location.parkname 
+# 			}
+# 			all_latlng.append(latlng)
+# 	return jsonify({'coordinates' : all_latlng})
 
 
 @app.route('/<int:park_id>')

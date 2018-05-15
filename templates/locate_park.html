@@ -3,12 +3,14 @@
 {% block title %}Locate Park {% endblock %}
 
 {% block content %}
+
 	<ul>
 		{% if locatepark %}
 		{% for park in locatepark %}<br>
 		<li > {{ park.parkname}} {{ park.location }}
+			<!-- <div id="locate"> </div> -->
+			<input type="hidden" class="coordinates" value= "{{ park.latitude }} {{ park.longitude }} {{ park.parkname }}" >
 
-			<a href= {{ park.park_id }}> View Map </a>
 		 </li>
 		{% endfor %}
 	</ul>
@@ -18,59 +20,67 @@
 		<h2>Suggestions for near by park</h2>
 		{% for park in zipcode_list %}<br>
 		<li>{{ park[0].parkname }} {{ park[0].location }} {{ park[0].zipcode }}
-			<a href= {{ park[0].park_id }}> View Map</a>
+			<input type="hidden" class="coordinates" value= "{{ park[0].latitude }} {{ park[0].longitude }} {{ park[0].parkname }}" >
+
 		</li>
 		{% endfor %}
 		{% endif %}
 
 
 	</ul>
-	<div id="map"></div>
+	
 
 	<style type="text/css">
-		html, body { height: 100%; margin: 0; padding: 0; }
+		html, body { height: 85%; margin: 0; padding: 0; }
 		#map { height: 100%; }
 	</style>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA36jAyNnRFdeH8dWD_yaqNHqXQq7wVcWo">
      </script>
-	<script>
+	<div id="map"></div>
+
+	<script type="text/javascript">
 		"use strict";
+		let coordinates = document.querySelectorAll(".coordinates");
+		console.log(coordinates);
+		let locationDetails = [];
 
-		let parkList = [];
-		fetch('/locate_park')
-		.then(function(response){
-			return response.text(); 
-		}).then(function(result) {
-			let mapattr = JSON.parse(result);
-			let mapCoordinates = {};
-			let coordinates = mapattr.coordinates;
-			let length = coordinates.length;
-			for (let i =0; i<1; i++) {
-				mapCoordinates = {
-					position: {
-						lat: parseFloat(mapattr.coordinates[i].lat),
-						lng : parseFloat(mapattr.coordinates[i].lng)						
-					},
-					title : mapattr.coordinates[i].name,
-				};
-			parkList.push(mapCoordinates);
-			}
-			parkList.forEach(function(element) {
-				let marker = new google.maps.Marker ({
-					position : element.position,
-					title : element.name,
-					map: map
-				});
-			});
+		for (let coordinate of coordinates){
+			locationDetails.push(coordinate.value);
+		}
+
+		console.log(locationDetails);
+				let map = new google.maps.Map(document.querySelector('#map'),{
+			center : { lat:37.7643148, lng:-122.3996072 },
+			zoom:13,
+			mapTypeId: 'roadmap'
 		});
-		
+
+		for (let i =0; i< (locationDetails.length); i++){
+
+
+		let locationDetail = locationDetails[i].split(' ');
+		let latitude = parseFloat(locationDetail[0]);
+		let longitude = parseFloat(locationDetail[1]);
+		let centerObject = new google.maps.LatLng(latitude,longitude);
+		let name = locationDetail[2]+' '+locationDetail[3];
+		console.log(name);
+		console.log(latitude);
+		console.log(longitude);
+		// console.log(centerObject);
+
+
+		let marker = new google.maps.Marker({
+          position: centerObject,
+          map: map,
+          title: name
+        });
+	}
+
+
+
+
+
 	</script>
-
-
-
-
-
-
 
 {% endblock %}
