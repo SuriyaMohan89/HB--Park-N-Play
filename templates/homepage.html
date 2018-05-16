@@ -16,20 +16,22 @@
 </form><br><br>
 
 
+
 <form action="/register">
 	<input type="submit" value="Sign Up Here">
 </form>
 
-{% if session %}
-<form action="/logout">
-	<input type="submit" value="Logout">
+<br>
+<b>Login</b><br><br>
+<form action = "/login" method='POST'>
+	Enter Username/Email:<br><input type="text" name="username"><br>
+	Enter password:<br><input type="password" name="password"><br>
+	<br><br><input type="submit" value="submit">
 </form>
 
-{% else %}
-<form action="/login">
-	<input type="submit" value="Login">
-</form>
-{% endif %}
+
+
+
 
 
 {% endblock %}

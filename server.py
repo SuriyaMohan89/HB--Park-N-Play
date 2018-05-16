@@ -7,7 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model_db import User,Park,Rating,Favorite, connect_to_db,db
 from sqlalchemy import update
-# from flask import jsonify 
+from flask import jsonify 
 
 
 app = Flask(__name__)
@@ -37,25 +37,23 @@ def register_process():
 
 	username = request.form.get('username')
 	email=request.form.get('email')
-	password= request.form.get('password')
+	password= request.form.get('password1')
+	confirm_password = request.form.get('password2')
 	zipcode = int(request.form.get('zipcode'))
 
-	if (User.query.filter(User.username == username) and (User.query.filter(User.email == email))):
+	if (User.query.filter(User.username == username,User.email == email)).first():
 		flash("Account already exists. Try Login")
 	else:
-		user=User(username=username,email=email,password=password,zipcode=zipcode)
-		db.session.add(user)
-		db.session.commit()
-		flash('Successfully Registered')
+		if password == confirm_password :
+			user=User(username=username,email=email,password=password,zipcode=zipcode)
+			db.session.add(user)
+			db.session.commit()
+			flash('Successfully Registered')
+		else:
+			flash("Incorrect password.")
 	
 	return redirect('/')
 
-
-@app.route('/login',methods=['GET'])
-def login_form():	
-	"""Show Login page"""
-
-	return render_template('login_form.html')
 
 @app.route('/login',methods=['POST'])
 def login_process():
@@ -72,6 +70,25 @@ def login_process():
 	else:
 		flash("Incorrect Login details")
 		return redirect('/')
+
+
+@app.route('/login.json')
+def search_park():
+	""" Search park by zipcode for ratings."""
+	zipcode = int(request.args.get('zipcode'))
+	search_park = Park.query.filter(Park.zipcode == zipcode).all()
+	print "~~~~~"
+	print search_park
+
+	park_dict = {}
+	if search_park:
+		for park in search_park:
+			park_dict[park.zipcode] = [park.parkname,park.location]
+		print park_dict
+		return jsonify(park_dict)
+	else:
+		flash('Park not found in zipcode.Try another zipcode')
+
 
 @app.route('/logout')
 def logout():
@@ -156,9 +173,7 @@ def locate_park():
 
 
 
-# @app.route('/report')
-# def report_issue():
-# 	""" Display contact info of manager to report any issue."""
+
 
 
 

@@ -1,9 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<h1> user details </h1>
-<ul>
-	<li> {{ user.username }}</li>
-	<li> {{ user.zipcode }}</li>
-</ul>
+<h3> Welcome {{ user.username }} </h3>
+
+<h4> Search park by zipcode </h4>
+
+<form id ="getInfo" method="get" action="/login.json">
+	<label> Please Enter Zipcode </label>
+	<input type = "text" id = "zipcode" name = "zipcode" pattern="[0-9]{5}">
+	<br>
+	<br>
+	<input  type="submit"  value = "submit">
+</form><br><br>
+
+<div id ="result"></div>
+<script src="http://code.jquery.com/jquery.js"></script>
+
+<script type="text/javascript">
+	"use strict";
+
+
+	function displayResult(results){
+		let park = results;
+		console.log(park);
+		$('#result').append(park);
+		console.log("success")
+	}
+	function sendZipcode(evt){
+		evt.preventDefault();
+		$.get("/login.json",{"zipcode" : $('#zipcode').val()},displayResult);
+	}
+
+$("#getInfo").on("submit", sendZipcode);
+
+</script>
+
 
 {% endblock %}
