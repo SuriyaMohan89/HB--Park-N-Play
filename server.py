@@ -86,9 +86,16 @@ def logout():
 def parks_list():
 	"""Displays list of parks in San Francisco"""
 
-	parks = Park.query.order_by(Park.zipcode).all()
+	parks = Park.query.order_by(Park.parkname).all()
 
 	return render_template("parks_list.html", parks=parks)
+
+@app.route('/<int:park_id>')
+def report_info(park_id):
+	"""Show contactinfo of park manager"""
+	manager_info = Park.query.get(park_id)
+
+	return render_template('park_info.html',manager_info=manager_info)
 
 
 @app.route('/locatepark')
@@ -148,21 +155,11 @@ def locate_park():
 # 	return jsonify({'coordinates' : all_latlng})
 
 
-@app.route('/<int:park_id>')
-def view_map_park(park_id):
-	"""View map of park selected by user"""
-	
-	print park_id
-	park = Park.query.get(park_id)
-	print park
 
-	return render_template("view_map.html",park=park)
+# @app.route('/report')
+# def report_issue():
+# 	""" Display contact info of manager to report any issue."""
 
-
-
-# @app.route('/ratings')
-# def rate_park():
-# 	""" Rate a park. """
 
 
 

@@ -18,7 +18,7 @@
 
 <ul>
 	{% for park in parks %}
-	<li> {{ park.parkname }} {{ park.zipcode }} 
+	<li> <a href="{{ park.park_id }}">{{ park.parkname }}</a>
 	</li>
 	{% endfor %}
 

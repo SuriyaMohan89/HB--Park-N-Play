@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Park Info{% endblock %}
+{% block content %}
+<h2> Info to report problem</h2>
+
+<button id ="info" type="button">Contact Info</button>
+
+<input type="hidden" id ="parkinfo" value="{{ manager_info.manager}} {{ manager_info.email }} {{ manager_info.phone }}">
+<p>
+  <b>Result: </b>
+  <p id='result'></p>
+</p>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+"use strict";
+
+let manager_info = document.querySelector("#parkinfo").value;
+let displayResult = $('#result');
+console.log(manager_info);
+function managerInfo(manager_info){
+	let manager= manager_info.split(' ');
+	let name = manager[0]+" "+manager[1];
+	console.log (name);
+	let email = manager[2];
+	console.log(email);
+	let phone = manager[3]+manager[4];
+	console.log(phone);
+
+}
+let buttonForInfo = $('#info');
+buttonForInfo.on('click',function(evt){
+	displayResult.html(managerInfo(manager_info));
+	evt.preventDefault();
+});
+
+
+
+</script>	
+
+
+
+{% endblock %}
