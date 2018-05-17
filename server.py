@@ -77,11 +77,23 @@ def search_park():
 	""" Search park by zipcode for ratings."""
 	zipcode = int(request.args.get('zipcode'))
 	search_park = Park.query.filter(Park.zipcode == zipcode).all()
+<<<<<<< HEAD
 
 	park_dict = {}
 	if search_park:
 		for park in search_park:
 			park_dict[park.zipcode] = [park.parkname,park.location, park.manager, park.email, park.phone]
+=======
+	print "~~~~~"
+	print search_park
+	park_list =[]
+	park_dict = {}
+	if search_park:
+		for park in search_park:
+			temp = [park.parkname,park.location,park.manager,park.email,park.phone]
+			park_list.append(temp)
+		park_dict[zipcode] = park_list
+>>>>>>> 0378015c97f4df68ccda2f89294578585f6f5354
 		print park_dict
 		return jsonify(park_dict)
 	else:
