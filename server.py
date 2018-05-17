@@ -77,13 +77,11 @@ def search_park():
 	""" Search park by zipcode for ratings."""
 	zipcode = int(request.args.get('zipcode'))
 	search_park = Park.query.filter(Park.zipcode == zipcode).all()
-	print "~~~~~"
-	print search_park
 
 	park_dict = {}
 	if search_park:
 		for park in search_park:
-			park_dict[park.zipcode] = [park.parkname,park.location]
+			park_dict[park.zipcode] = [park.parkname,park.location, park.manager, park.email, park.phone]
 		print park_dict
 		return jsonify(park_dict)
 	else:
@@ -109,10 +107,10 @@ def parks_list():
 
 @app.route('/<int:park_id>')
 def report_info(park_id):
-	"""Show contactinfo of park manager"""
-	manager_info = Park.query.get(park_id)
+	"""Show parks with ratings and add ratings if user has logged in"""
+	park = Park.query.get(park_id)
 
-	return render_template('park_info.html',manager_info=manager_info)
+	return render_template('park_info.html', park=park)
 
 
 @app.route('/locatepark')
