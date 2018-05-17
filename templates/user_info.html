@@ -20,9 +20,9 @@
 
 
 	function displayResult(results){
-		let park = results;
+		let park =JSON.stringify(results);
 		console.log(park);
-		$('#result').append(park);
+		$('#result').html(Object.values(park));
 		console.log("success")
 	}
 	function sendZipcode(evt){
