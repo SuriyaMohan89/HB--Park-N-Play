@@ -8,6 +8,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model_db import User,Park,Rating,Favorite, connect_to_db,db
 from sqlalchemy import update
 from flask import jsonify 
+from flask import json
 
 
 app = Flask(__name__)
@@ -77,13 +78,11 @@ def search_park():
 	""" Search park by zipcode for ratings."""
 	zipcode = int(request.args.get('zipcode'))
 	search_park = Park.query.filter(Park.zipcode == zipcode).all()
-<<<<<<< HEAD
 
 	park_dict = {}
 	if search_park:
 		for park in search_park:
 			park_dict[park.zipcode] = [park.parkname,park.location, park.manager, park.email, park.phone]
-=======
 	print "~~~~~"
 	print search_park
 	park_list =[]
@@ -92,10 +91,9 @@ def search_park():
 		for park in search_park:
 			temp = [park.parkname,park.location,park.manager,park.email,park.phone]
 			park_list.append(temp)
-		park_dict[zipcode] = park_list
->>>>>>> 0378015c97f4df68ccda2f89294578585f6f5354
-		print park_dict
-		return jsonify(park_dict)
+		# park_dict[zipcode] = park_list
+		# print park_dict
+		return jsonify(park_list)
 	else:
 		flash('Park not found in zipcode.Try another zipcode')
 
@@ -113,7 +111,7 @@ def logout():
 def parks_list():
 	"""Displays list of parks in San Francisco"""
 
-	parks = Park.query.order_by(Park.parkname).all()
+	parks = Park.query.order_by(Park.zipcode).all()
 
 	return render_template("parks_list.html", parks=parks)
 

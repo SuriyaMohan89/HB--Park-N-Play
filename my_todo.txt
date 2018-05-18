@@ -54,13 +54,13 @@ HomeWork To Be Done:
 @@@ Think about how to schedule event
 @@@ Think about main functionality
 
-<May 14>
+<May 19>
 
->>>>> Think about functionality - schedule
+>>>>>> For google map api in react refer https://2018-june-ada.slack.com/archives/CAG3MMSBY/p1526589086000306?thread_ts=1526588944.000633&cid=CAG3MMSBY
 
->>>>> Populate parks in same map
->>>>> Add ratings 
->>>>> Add Favorites
+>>>>>> Working in json data -parsing - 
+
+
 
 
 
