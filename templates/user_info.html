@@ -25,66 +25,34 @@ function displayResult(results){
 			data = results;
 			$('#result').empty();
 			let i=0;
+
 			for (let result of results){
 					$('#result').append(' '+result[0]+' '+result[1]+ '<pre class="tab"></pre>'+
-					`<button id ="${i}" value="${result}" type ="button" onClick="displayContact(this)"> Contact Info</button>`+'<br>'+'<br>'+
-						`<div id="${i}"></div>`);		
+					`<button id ="button_${i}" value="${result}" type ="button" onClick="displayContact(this)"> Contact Info</button>`+'<br>'+'<br>'+
+						`<div id="div_${i}"></div>`)+'<br>';		
 
 
     		i++;
     		}
     	}
+
 let displayContact= function(param){
-
-	console.log(param.id);
-
-	console.log($(`div#${param.id}`));
-
+	console.log(param)
+	let p = param.id;
+	p = p.split('_');
+	let id = parseInt(p[1]);
+	console.log(id);
+	$(`#div_${id}`).empty();
 	let result = param.value;
+	result = result.split(",");
 	
+	$(`#div_${id}`).append(result[5]+'<br>'+result[6]+'<br>'+result[7]+'<br>');
 
-	// result = result.split(',');
-	// console.log(result[0]);
-	// console.log(result[-1]);
-	// console.log(result[-2]);
-	// console.log(result[-3]);
 
-	// let test = $(`#${result[0]}`)
-
-	// console.log(test)
-
-	$(`div#${param.id}`).text("hgt");
 
 }
 
-// result[0]+'<br>'
-								// +result[-2]+'<br>'+result[-1]
 
-
-
-	// function displayResult(results){
-	// 	console.log(results);
-	// 		$('#result').empty();		
-	// 		let i = 1;	
-	// 		for (let result of results){
-	// 			$('#result').append(' '+result[0]+' '+result[1]+ '<pre class="tab"></pre>'+
-	// 				`<button id ="${i}" value="${i}" type ="button"> Contact Info</button>`+'<br>'+'<br>'+
-	// 					`<div id="${result[0]}"><div>`);
-	// 			$('#result').on("click",`#${i}`,function(evt){
-	// 						console.log(evt)
-	// 						// j equal to value of button
-	// 						evt.preventDefault();
-	// 						$(`${result[0]}`).html(results[j-1][2]+'<br>'
-	// 							+results[j-1][3]+'<br>'+results[j-1][4]);
-
-
-
-	// 			});
-
-	// 			i++;
-	// 			console.log(i);
-	// 		}
-	// }
 	function sendZipcode(evt){
 		evt.preventDefault();
 		$.get("/login.json",{"zipcode" : $('#zipcode').val()},displayResult);
