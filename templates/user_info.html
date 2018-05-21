@@ -25,20 +25,37 @@ function displayResult(results){
 			data = results;
 			$('#result').empty();
 			let i=0;
+
 			for (let result of results){
 					$('#result').append(' '+result[0]+' '+result[1]+ '<pre class="tab"></pre>'+
+<<<<<<< HEAD
 					`<button id ="${i}" value="${result}" type ="button" onClick="displayContact(this)"> Contact Info</button>`+'<br>'+'<br>'+
 						`<div id="${i}"><div>`);		
+=======
+					`<button id ="button_${i}" value="${result}" type ="button" onClick="displayContact(this)"> Contact Info</button>`+'<br>'+'<br>'+
+						`<div id="div_${i}"></div>`)+'<br>';		
+>>>>>>> ade8ff29273b10c3d682d49c82d7dc326343d9a3
 
 
     		i++;
     		}
     	}
+<<<<<<< HEAD
 let displayContact= function(param){
 
 	console.log($(`div#${param.id}`));
+=======
+>>>>>>> ade8ff29273b10c3d682d49c82d7dc326343d9a3
 
+let displayContact= function(param){
+	console.log(param)
+	let p = param.id;
+	p = p.split('_');
+	let id = parseInt(p[1]);
+	console.log(id);
+	$(`#div_${id}`).empty();
 	let result = param.value;
+<<<<<<< HEAD
 	let id = parseInt(param.id);
 	console.log(data[id][2]);
 
@@ -47,6 +64,17 @@ let displayContact= function(param){
 
 }
 
+=======
+	result = result.split(",");
+	
+	$(`#div_${id}`).append(result[5]+'<br>'+result[6]+'<br>'+result[7]+'<br>');
+
+
+
+}
+
+
+>>>>>>> ade8ff29273b10c3d682d49c82d7dc326343d9a3
 	function sendZipcode(evt){
 		evt.preventDefault();
 		$.get("/login.json",{"zipcode" : $('#zipcode').val()},displayResult);

@@ -90,7 +90,10 @@ def search_park():
 		for park in search_park:
 			temp = [park.parkname,park.location,park.manager,park.email,park.phone]
 			park_list.append(temp)
+<<<<<<< HEAD
 
+=======
+>>>>>>> ade8ff29273b10c3d682d49c82d7dc326343d9a3
 		return jsonify(park_list)
 	else:
 		flash('Park not found in zipcode.Try another zipcode')
