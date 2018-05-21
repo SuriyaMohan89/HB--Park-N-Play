@@ -83,7 +83,6 @@ def search_park():
 	if search_park:
 		for park in search_park:
 			park_dict[park.zipcode] = [park.parkname,park.location, park.manager, park.email, park.phone]
-	print "~~~~~"
 	print search_park
 	park_list =[]
 	park_dict = {}
@@ -91,8 +90,7 @@ def search_park():
 		for park in search_park:
 			temp = [park.parkname,park.location,park.manager,park.email,park.phone]
 			park_list.append(temp)
-		# park_dict[zipcode] = park_list
-		# print park_dict
+
 		return jsonify(park_list)
 	else:
 		flash('Park not found in zipcode.Try another zipcode')

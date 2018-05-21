@@ -1,0 +1,22 @@
+function displayResult(results){
+		console.log(results);
+			$('#result').empty();		
+			let i = 1;	
+			for (let result of results){
+				$('#result').append(' '+result[0]+' '+result[1]+ '<pre class="tab"></pre>'+
+					`<button id ="${i}" type ="button"> Contact Info</button>`+'<br>'+'<br>'+
+						`<div id="showInfo${i}"><div>`);
+				$('#result').on("click",`#${i}`,function(evt){
+							console.log(evt)
+							evt.preventDefault();
+							console.log(i)
+							$(`#showInfo${i}`).html(result[2]+'<br>'
+								+result[3]+'<br>'+result[4]);
+
+
+				});
+
+				i++;
+				console.log(i);
+			}
+	}
