@@ -67,7 +67,7 @@ class Rating(db.Model):
     rating_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
     # user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
-    rating = db.Column(db.Integer,nullable=False)
+    rating = db.Column(db.Float,nullable=False)
     reviews = db.Column(db.Integer,nullable=False)
 
 
@@ -81,10 +81,9 @@ class Rating(db.Model):
     def __repr__(self):
         """ For printing in Terminal,helps debugging"""
 
-        return "<Rating rating_id={} park_id={} user_id={} score={}>".format(self.rating_id,
+        return "<Rating rating_id={} park_id={} rating={}>".format(self.rating_id,
                                                                         self.park_id,
-                                                                        self.user_id,
-                                                                        self.score)
+                                                                        self.rating)
 
 
 

@@ -67,7 +67,7 @@ HomeWork To Be Done:
 >>>>> Working on my ratings
       >> Create dropdown for three reviews in the same page --- SUCCESS
       >> Work on showing parks grouped based on zip code ---- SUCCESS
-      >> On server side, average three ratings and pass on jsonified result.
+      >> On server side, average three ratings and pass on jsonified result.--- HALF DONE
       >> Display on park_list page
 
 

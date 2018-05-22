@@ -116,6 +116,10 @@ def parks_list():
 	# for zip in zipcode_set:
 
 	parks = Park.query.options(db.joinedload('scores')).order_by(Park.zipcode).all()
+	# for park in parks:
+	# 	print park.parkname,park.scores
+	# 	if park.scores:
+	# 		print park.scores[0]
 
 	# for park in parks:
 	# 	print park
@@ -132,28 +136,33 @@ def report_info(park_id):
 
 	return render_template('park_info.html', park=park)
 
-@app.route('/<int:park_id>')
+@app.route('/<int:park_id>/edit')
 def add_ratings(park_id):
 	"""Add ratings if user has logged in"""
-	reviews = 1
 	clean_score = int(request.args.get("cleanscore"))
 	equip_score = int(request.args.get("equipscore"))
 	maintain_score = int(request.args.get("maintainscore"))
 	total_score = (clean_score + equip_score + maintain_score)/ float(3)
 
 	rating_score = Rating.query.filter(Rating.park_id == park_id).first()
+	# try except 
 
 	if not rating_score:
-		rate = Rating(park_id = park_id, rating=total_score,reviews = reviews)
-		db.session.add(rating)
+		rate = Rating(park_id = park_id, rating = total_score,reviews = 1)
+		db.session.add(rate)
 
 	else:
-		Rating.reviews = reviews+1
-		Rating.rating = (total_score + rating.rating)/ float(reviews)
-
+		temp = rating_score.reviews
+		temp_count = rating_score.reviews+1
+		rating_score.reviews = rating_score.reviews+1
+		rating_score.rating = ((rating_score.rating*temp)+total_score)/float(temp_count)
+		rating_score.rating = "{0:.1f}".format(rating_score.rating)
+		rate = Rating(park_id = rating_score.park_id, rating = rating_score.rating, reviews = rating_score.reviews)
+		db.session.add(rate)
 	db.session.commit()
+	flash("Thanks for feedback!!!")
 
-	return redirect('park_list.html')
+	return redirect("/parks")
 
 
 
