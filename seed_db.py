@@ -49,8 +49,7 @@ def load_ratings():
 	"""Load ratings into database"""
 	Rating.query.delete()
 
-	rating= Rating(cleanliness_score=cleanliness_score, equipment_score=equipment_score,overall_score=overall_score)
-
+	rating= Rating(park_id = park_id,rating= rating,reviews=reviews)
 	db.session.add(rating)
 	db.session.commit() 
 

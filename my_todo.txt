@@ -60,6 +60,24 @@ HomeWork To Be Done:
 
 >>>>>> Working in json data -parsing - 
 
+<May 21>
+
+>>>>> So Far :
+	Got my Buttons in user info working...
+>>>>> Working on my ratings
+      >> Create dropdown for three reviews in the same page --- SUCCESS
+      >> Work on showing parks grouped based on zip code ---- SUCCESS
+      >> On server side, average three ratings and pass on jsonified result.
+      >> Display on park_list page
+
+
+@@@@ Iron clothes
+@@@@ Find algorithms and send to Alyssa-- SUCCESS
+@@@@ Do hacker rank homework
+@@@@ Take time to revise runtime
+@@@@ career dev --- make changes to resume, frodo bio, career story
+
+
 
 
 

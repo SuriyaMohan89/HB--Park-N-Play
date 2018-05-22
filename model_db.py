@@ -66,13 +66,13 @@ class Rating(db.Model):
 
     rating_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
-    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
-    cleanliness_score = db.Column(db.Integer,nullable=False)
-    equipment_score = db.Column(db.Integer,nullable=False)
-    overall_score = db.Column(db.Integer,nullable=False)
+    # user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
+    rating = db.Column(db.Integer,nullable=False)
+    reviews = db.Column(db.Integer,nullable=False)
 
-    user = db.relationship("User",backref=db.backref("scores",order_by=rating_id))
-    park = db.relationship("Park",backref=db.backref("scores",order_by=rating_id))
+
+    # user = db.relationship("User",backref=db.backref("scores",order_by=rating_id))
+    park = db.relationship("Park",backref=db.backref("scores"))
 
     
 

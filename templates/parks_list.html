@@ -9,10 +9,17 @@
 <h3>Parks</h3>
 
 <ul>
+	{% for zipcode in zipcodes %}
+	<h4><b>{{ zipcode}}</b></h4>
 	{% for park in parks %}
-	<li> <a href="{{ park.park_id }}">{{ park.parkname }} {{ park.zipcode }}</a>
+	{% if park.zipcode == zipcode %} 
+	<li> <a href="{{ park.park_id }}">{{ park.parkname }} {% if park.scores %} {{ park.scores.rating }} {% endif %}</a>
 	</li>
+	{% endif %}
 	{% endfor %}
+	{% endfor %}
+
+
 
 </ul>
 
