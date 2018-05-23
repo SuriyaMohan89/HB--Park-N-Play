@@ -78,12 +78,12 @@ HomeWork To Be Done:
 @@@@ career dev --- make changes to resume, frodo bio, career story
 
 <May 22>
->>>>> Working ratings and reviews SUCCESS
+>>>>> Working ratings and reviews ------ SUCCESS
 >>>>> Add data model for schedule which will be the middle data  
 
-@@@@ White board 
-@@@@ Hacker Rank
-@@@@ Revise stacks,queue
+@@@@ White board -- Not done
+@@@@ Hacker Rank -- SUCCESS 
+@@@@ Revise stacks,queue -- SUCCESS
 
 Good calender API to use:
 
@@ -93,6 +93,18 @@ https://fullcalendar.io/docs
 
 https://bootsnipp.com/snippets/ZVZZy
 
+<May 23>
+
+>>>>> Show view park link only to login users --- CHANGE OF MIND --
+>>>>> Create button for schedule-- SUCCESS
+for date object
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current
+>>>>> click show dropdown time and date 
+>>>>> Change ratings like wise. Have a button ratings and then show options to rate
+>>>>> Likewise add Schedule table and establish relationship
+>>>>> On server side, add schedule to database
+
+@@@@ Problems on stack,queue, more clarification on linked list
 
 
 

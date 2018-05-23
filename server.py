@@ -55,6 +55,12 @@ def register_process():
 	
 	return redirect('/')
 
+@app.route("/login",methods=["GET"])
+def login_form():
+	"""Show Login page"""
+
+	return render_template("login_page.html")
+
 
 @app.route('/login',methods=['POST'])
 def login_process():
@@ -62,7 +68,6 @@ def login_process():
 	login = request.form.get('username')
 	password = request.form.get('password')
 	user = User.query.filter(((User.email == login) | (User.username == login)) & (User.password == password)).first()
-	print user
 	if user:
 		session["user_id"] = user.user_id
 		flash("Successfully Logged In!!")
@@ -70,7 +75,7 @@ def login_process():
 
 	else:
 		flash("Incorrect Login details")
-		return redirect('/')
+		return redirect('/login')
 
 
 @app.route('/login.json')
