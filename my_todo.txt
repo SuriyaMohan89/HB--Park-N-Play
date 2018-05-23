@@ -71,11 +71,28 @@ HomeWork To Be Done:
       >> Display on park_list page
 
 
-@@@@ Iron clothes
+@@@@ Iron clothes done
 @@@@ Find algorithms and send to Alyssa-- SUCCESS
-@@@@ Do hacker rank homework
-@@@@ Take time to revise runtime
+@@@@ Do hacker rank homework partially done
+@@@@ Take time to revise runtime done
 @@@@ career dev --- make changes to resume, frodo bio, career story
+
+<May 22>
+>>>>> Working ratings and reviews SUCCESS
+>>>>> Add data model for schedule which will be the middle data  
+
+@@@@ White board 
+@@@@ Hacker Rank
+@@@@ Revise stacks,queue
+
+Good calender API to use:
+
+https://github.com/nizarmah/calendar-javascript-lib/blob/master/README.md
+
+https://fullcalendar.io/docs
+
+https://bootsnipp.com/snippets/ZVZZy
+
 
 
 
