@@ -101,6 +101,13 @@ def search_park():
 		flash('Park not found in zipcode.Try another zipcode')
 
 
+@app.route('/login/schedule')
+def schedule():
+	"""Schedule to find play mate"""
+
+	return render_template("schedule.html")
+
+
 @app.route('/logout')
 def logout():
 	"""Log out the user"""
@@ -117,20 +124,7 @@ def parks_list():
 	zipcode_temp = [zip[0] for zip in zipcode_list]
 	zip_uniq =set(zipcode_temp)
 	zipcodes = list(zip_uniq)
-	# print zipcodes
-	# for zip in zipcode_set:
-
 	parks = Park.query.options(db.joinedload('scores')).order_by(Park.zipcode).all()
-	# for park in parks:
-	# 	print park.parkname,park.scores
-	# 	if park.scores:
-	# 		print park.scores[0]
-
-	# for park in parks:
-	# 	print park
-	# 	print type(park.scores)
-	# 	print park.scores
-		# print park.scores.rating
 
 	return render_template("parks_list.html", parks=parks,zipcodes=zipcodes)
 

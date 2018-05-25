@@ -99,6 +99,9 @@ https://bootsnipp.com/snippets/ZVZZy
 >>>>> Create button for schedule-- SUCCESS
 for date object
 https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current
+
+https://codepen.io/magnus16/pen/JdjpNW ############## IMPORTANT
+
 >>>>> click show dropdown time and date 
 >>>>> Change ratings like wise. Have a button ratings and then show options to rate
 >>>>> Likewise add Schedule table and establish relationship

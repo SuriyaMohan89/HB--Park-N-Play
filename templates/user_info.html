@@ -2,10 +2,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <button id ="report" type = "button"> REPORT</button>
-<button id="schedule" type = "button" > SCHEDULE </button>
+<button id="schedule" type = "button"  > SCHEDULE </button>
 <div class="contactManager"> </div>
-<div class="scheduleEvent"></div>
+<!-- <div class="scheduleEvent"></div> -->
+<br><br>
+
 
 <div id ="result"></div>
 
@@ -60,16 +63,23 @@
 		formSubmit.addEventListener("click", sendZipcode);
 
 	}
-	function displayFormSchedule(){
-		$(".contactManager").html("<form><input type="date" max="2020-12-31"><br><br><input type="submit"> </form>")
-	}
+	// function displayFormSchedule(){
+	// 	$(".contactManager").html("<form><input type="date" max="2020-12-31"><br><br><input type="submit"> </form>")
+	// }
 
 	let reportButton = document.querySelector('#report');
 	// let scheduleButton = document.querySelector('#schedule');
 
 	reportButton.addEventListener("click",displayFormReport);
 	// scheduleButton.addEventListener("click", displayFormSchedule);
+
+	$('#schedule').click(function(){
+   window.location.href='http://localhost:5000/login/schedule';
+})
+   
 </script>
+
+
 
 
 

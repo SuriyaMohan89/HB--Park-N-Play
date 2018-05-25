@@ -2,6 +2,7 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 
 
@@ -84,6 +85,34 @@ class Rating(db.Model):
         return "<Rating rating_id={} park_id={} rating={}>".format(self.rating_id,
                                                                         self.park_id,
                                                                         self.rating)
+
+
+class Schedule(db.Model):
+    """ Show scheduled time by user"""
+    __tablename__="scheduler"
+
+    schedule_id = db.Column(db.Integer, autoincrement=True,primary_key=True)
+    park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
+    date = db.Column(db.DateTime, nullable=False)
+    time = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+
+    user = db.relationship("User",backref=db.backref("schedule",order_by=schedule_id))
+    park = db.relationship("Park",backref=db.backref("schedule",order_by=schedule_id))
+
+
+
+    def __repr__(self):
+        """ For printing in Terminal,helps debugging"""
+
+        return "<Schedule schedule_id={} park_id={} user_id={}>".format(self.scheule_id,
+                                                                        self.park_id,
+                                                                        self.user_id)
+
+
+
+
+
 
 
 

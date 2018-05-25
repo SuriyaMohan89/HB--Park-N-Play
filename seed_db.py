@@ -5,7 +5,7 @@ from model_db import User
 from model_db import Park
 from model_db import Rating
 from model_db import Favorite
-
+from model_db import Schedule
 from model_db import connect_to_db,db
 import csv
 
@@ -54,6 +54,15 @@ def load_ratings():
 	db.session.commit() 
 
 
+def load_schedule():
+	"""Load scheduled date and time of an user for a park into database"""
+	Rating.query.delete()
+
+	schedule= Schedule(user_id=user_id,park_id = park_id,date= date,time=time)
+	db.session.add()
+	db.session.commit() 
+
+
 
 def set_val_user_id():
 	"""Set value for the next user_id after seeding database"""
@@ -78,5 +87,6 @@ if __name__ == '__main__':
 	# load_users()
 	load_parks()
 	# load_ratings()
+	# load_schedule()
 	# set_val_user_id()
 

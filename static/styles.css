@@ -1,0 +1,155 @@
+body {
+  background: #4d4dff;
+  color: #fff;
+  font-family: verdana;
+}
+
+.clock-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 20px 0;
+}
+
+.pie {
+  height: 50%;
+  width: calc(50% - 2px);
+  background: #1FADDF;
+  display: block;
+  float: left;
+  margin-right: 2px !important;
+  margin-bottom: 2px !important;
+  cursor: pointer;
+  -webkit-transition: all 300ms cubic-bezier(.45, -0.6, .52, 1.6);
+  transition: all 300ms cubic-bezier(.45, -0.6, .52, 1.6);
+  color: #fff;
+  position: relative;
+}
+
+.pie:hover {
+  background: #fff;
+  color: #16a085;
+}
+
+.pie span {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.pie-morning {
+  border-top-left-radius: 100%;
+}
+
+.pie-morning span {
+  bottom: 15px;
+}
+
+#radio-morning:checked ~ .clock-container .pie-morning {
+  -webkit-transform: scale(1.05) translate(-10px, -10px);
+  transform: scale(1.05) translate(-10px, -10px);
+  background: #fff;
+  color: #16a085;
+}
+
+.pie-afternoon {
+  border-top-right-radius: 100%;
+}
+
+.pie-afternoon span {
+  bottom: 15px;
+}
+
+#radio-afternoon:checked ~ .clock-container .pie-afternoon {
+  -webkit-transform: scale(1.05) translate(10px, -10px);
+  transform: scale(1.05) translate(10px, -10px);
+  background: #fff;
+  color: #16a085;
+}
+
+.pie-evening {
+  border-bottom-right-radius: 100%;
+}
+
+.pie-evening span {
+  top: 15px;
+}
+
+#radio-evening:checked ~ .clock-container .pie-evening {
+  -webkit-transform: scale(1.05) translate(10px, 10px);
+  transform: scale(1.05) translate(10px, 10px);
+  background: #fff;
+  color: #16a085;
+}
+
+.pie-night {
+  border-bottom-left-radius: 100%;
+}
+
+.pie-night span {
+  top: 15px;
+}
+
+#radio-night:checked ~ .clock-container .pie-night {
+  -webkit-transform: scale(1.05) translate(-15px, 15px);
+  transform: scale(1.05) translate(-10px, 10px);
+  background: #fff;
+  color: #16a085;
+}
+
+.time-picker-container {
+  position: relative;
+  width: 450px;
+  margin:100px auto;
+}
+
+.time-picker-container input[type="radio"] {
+  display: none;
+}
+
+h2.time-display {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  overflow: hidden;
+  height: 40px;
+  background:#87cefa;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold !important;
+  line-height: 40px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+span.time-display-inner {
+  display: block;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+.time-display-inner span {
+  display: block;
+}
+
+#radio-morning:checked ~ .time-display .time-display-inner {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+#radio-afternoon:checked ~ .time-display .time-display-inner {
+  -webkit-transform: translateY(-39px);
+  transform: translateY(-39px);
+}
+
+#radio-evening:checked ~ .time-display .time-display-inner {
+  -webkit-transform: translateY(-81px);
+  transform: translateY(-81px);
+}
+
+#radio-night:checked ~ .time-display .time-display-inner {
+  -webkit-transform: translateY(-120px);
+  transform: translateY(-120px);
+}
