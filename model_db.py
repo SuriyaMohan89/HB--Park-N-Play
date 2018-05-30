@@ -94,8 +94,8 @@ class Schedule(db.Model):
     schedule_id = db.Column(db.Integer, autoincrement=True,primary_key=True)
     park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
-    date = db.Column(db.DateTime, nullable=False)
-    time = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+    start_time = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
+    end_time = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
 
     user = db.relationship("User",backref=db.backref("schedule",order_by=schedule_id))
     park = db.relationship("Park",backref=db.backref("schedule",order_by=schedule_id))
@@ -105,9 +105,10 @@ class Schedule(db.Model):
     def __repr__(self):
         """ For printing in Terminal,helps debugging"""
 
-        return "<Schedule schedule_id={} park_id={} user_id={}>".format(self.scheule_id,
+        return "<Schedule schedule_id={} park_id={} user_id={} start_time={}>".format(self.schedule_id,
                                                                         self.park_id,
-                                                                        self.user_id)
+                                                                        self.user_id,
+                                                                        self.start_time)
 
 
 

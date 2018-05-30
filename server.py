@@ -5,10 +5,11 @@ from jinja2 import StrictUndefined
 from flask import(Flask,render_template, redirect, request, flash, session, url_for)
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model_db import User,Park,Rating,Favorite, connect_to_db,db
+from model_db import User,Park,Rating,Favorite,Schedule,connect_to_db,db
 from sqlalchemy import update
 from flask import jsonify 
 from flask import json
+from datetime import date,time,datetime
 
 
 app = Flask(__name__)
@@ -106,6 +107,35 @@ def schedule():
 	"""Schedule to find play mate"""
 
 	return render_template("schedule.html")
+
+@app.route('/login/schedule.json')
+def schedule_process():
+	"""Given the start time and end time query for correlations"""
+	
+	date_start = str(request.args.get("start_date"))
+	date_end = str(request.args.get("end_date"))
+	start_str = date_start[0:-14]
+	start_str = start_str.rstrip()
+	end_str = date_end[0:-14]
+	end_str = end_str.rstrip()
+	try:
+		start_time = datetime.strptime(start_str,"%a %b %d %Y %H:%M:%S")
+		print "~~~~~~~~~~~~~~~~~~"
+		print start_time
+		end_time = datetime.strptime(end_str,"%a %b %d %Y %H:%M:%S")
+		print "~~~~~~~~~~~~~~~~~~"
+		print end_time
+
+	except ValueError:
+	 	print("Incorrect data format, should be YYYY-MM-DD")
+
+	schedule = Schedule(park_id =108, user_id = session["user_id"], start_time=start_time, end_time=end_time)
+	print "######################"
+	print schedule
+	db.session.add(schedule)
+	db.session.commit()
+
+	return json.dumps(schedule.__dict__)
 
 
 @app.route('/logout')
