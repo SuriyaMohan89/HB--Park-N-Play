@@ -94,8 +94,8 @@ class Schedule(db.Model):
     schedule_id = db.Column(db.Integer, autoincrement=True,primary_key=True)
     park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
-    start_time = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
-    end_time = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime,nullable=False)
 
     user = db.relationship("User",backref=db.backref("schedule",order_by=schedule_id))
     park = db.relationship("Park",backref=db.backref("schedule",order_by=schedule_id))
@@ -141,6 +141,12 @@ class Favorite(db.Model):
                                                                                     self.park_id,
                                                                                     self.user_id,
                                                                                     self.is_favorite)
+
+
+
+
+
+
 
         ##############################################################################################################
 # Helper functions
