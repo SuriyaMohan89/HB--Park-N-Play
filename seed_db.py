@@ -8,7 +8,7 @@ from model_db import Favorite
 from model_db import Schedule
 from model_db import connect_to_db,db
 from faker import Faker
-from random import randint
+from random import randint,choice
 from datetime import date,time,datetime,timedelta
 import csv
 
@@ -86,12 +86,12 @@ def seed_user_datas(fake):
     db.session.commit()
 def seed_schedule_datas(fake):
 
-    for i in range(100):
+    for i in range(1000,3000):
 
-		start_temp = fake.future_datetime(end_date="+30d", tzinfo=None)
+		start_temp = fake.future_datetime(end_date="+10d", tzinfo=None)
 		start_time = start_temp.replace(minute=0, second=0)
 		end_time = start_time + timedelta(hours=3)
-		sche = Schedule(user_id = randint(1,30), park_id = randint(1,100),start_time = start_time, end_time = end_time) 
+		sche = Schedule(schedule_id = i+1,user_id = randint(1,20), park_id = choice([90,121,151,152,174,4,15,20,22,48,49,52,56]),start_time = start_time, end_time = end_time) 
 		print sche
 		db.session.add(sche)
     db.session.commit()
@@ -119,9 +119,10 @@ if __name__ == '__main__':
 	# Create table if table haven't been created
 	db.create_all()
 	fake = Faker()
+	load_parks()
 	seed_user_datas(fake)
 	seed_schedule_datas(fake)
-	load_parks()
+
 	# load_ratings()
 	# load_schedule()
 	# set_val_user_id()

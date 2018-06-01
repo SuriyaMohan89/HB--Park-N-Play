@@ -138,14 +138,13 @@ def schedule_process(park_id):
 
 		schedule_query = Schedule.query.filter(Schedule.park_id == park_id, Schedule.start_time == start_time).count()-1
 
-		n=1
-		while n < 3:
-			if schedule_query is None:
-				less_start_time = start_time + timedelta(hours = n)
-				add_end_time = end_time - timedelta (hours = n)
-				suggestion_query = Schedule.query.filter(Schedule.park_id == park_id, Schedule.start_time == less_start_time).count()
-				n+=1
-				return jsonify(suggestion_query)
+
+		if schedule_query is None:
+			less_start_time = start_time + timedelta(hours = n)
+			add_end_time = end_time - timedelta (hours = n)
+			suggestion_query = Schedule.query.filter(Schedule.park_id == park_id, Schedule.start_time == less_start_time).count()
+			n+=1
+			return jsonify(suggestion_query)
 
 		return jsonify(schedule_query)
 

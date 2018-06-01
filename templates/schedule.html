@@ -64,9 +64,9 @@
     if (results == "reschedule"){
       $("#Reschedule").html("Try Reschedule")
     }
-    if (results != "reschedule"){
+    if ((results != "reschedule") && (results > 0)) {
     $("#Reschedule").empty()
-    $("#ScheduleCount").html(results)
+    $("#ScheduleCount").html(`<p> You have ${results} many children playing at that time</p>`)
   }
 }
 
