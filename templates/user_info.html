@@ -29,7 +29,7 @@
 				let i=0;
 
 				for (let result of results){
-						$('#report_result').append(' '+result[0]+' '+result[1]+ '<pre class="tab"></pre>'+	
+						$('#report_result').append(' '+result[1]+ '<pre class="tab"></pre>'+	
 						`<button id ="button_${i}" value="${result}" type ="button" onClick="displayContact(this)"> Contact Info</button>`+'<br>'+'<br>'+
 							`<div id="div_${i}"></div>`)+'<br>';	
 
@@ -50,7 +50,7 @@
 		let result = param.value;
 		result = result.split(",");
 		
-		$(`#div_${id}`).append(result[5]+'<br>'+result[6]+'<br>'+result[7]+'<br>');
+		$(`#div_${id}`).append(result[6]+'<br>'+result[7]+'<br>'+result[8]+'<br>');
 	}
 
 
@@ -72,6 +72,7 @@
 
 	}
 
+
 	function displayParks(results){
 		data = results;
 	
@@ -81,7 +82,7 @@
 		let i=0;
 
 		for (let result of results){
-			$('#schedule_result').append(' '+result[0]+' '+result[1])
+			$('#schedule_result').append( `<a href ='/schedule/${result[0]}'>${result[1]}</a>`+'<br>'+'<br>')
 		}
 	}
 

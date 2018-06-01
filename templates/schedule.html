@@ -6,7 +6,7 @@
 
 
 
-
+<input id = "parkid" type="text" value="{{ park_id }}" hidden>
 
 
 
@@ -50,15 +50,25 @@
 </select><br><br>
 <input id ="submitform" type = "submit" value="submit">
 </div>
-</form>
+</form><br><br>
+<div id ="Reschedule"></div>
+<div id = "ScheduleCount"> </div>
+
+
 <script src="http://code.jquery.com/jquery.js"></script>
 <script  type="text/javascript">
   "use strict"
  
   // console.log(endTime);
   function displayResults(results){
-    console.log(results);
+    if (results == "reschedule"){
+      $("#Reschedule").html("Try Reschedule")
+    }
+    if (results != "reschedule"){
+    $("#Reschedule").empty()
+    $("#ScheduleCount").html(results)
   }
+}
 
   function sendTime(evt){
   evt.preventDefault();
@@ -71,8 +81,8 @@
   let startTime = new Date(date+" "+startTemp);
   let endTime = new Date(date+" "+endTemp)
   console.log(startTime);
-
-    $.get('/login/schedule.json',{"start_date" : startTime, "end_date" : endTime},displayResults);
+  let parkId = document.getElementById("parkid").value;
+    $.get(`/schedule/${parkId}/schedule.json`,{"start_date" : startTime, "end_date" : endTime},displayResults);
   }
 
   $("#submitform").on("click",sendTime);

@@ -88,13 +88,13 @@ def search_park():
 	park_dict = {}
 	if search_park:
 		for park in search_park:
-			park_dict[park.zipcode] = [park.parkname,park.location, park.manager, park.email, park.phone]
+			park_dict[park.zipcode] = [park.park_id,park.parkname,park.location, park.manager, park.email, park.phone]
 	print search_park
 	park_list =[]
 	park_dict = {}
 	if search_park:
 		for park in search_park:
-			temp = [park.parkname,park.location,park.manager,park.email,park.phone]
+			temp = [park.park_id,park.parkname,park.location,park.manager,park.email,park.phone]
 			park_list.append(temp)
 
 		return jsonify(park_list)
@@ -102,14 +102,14 @@ def search_park():
 		flash('Park not found in zipcode.Try another zipcode')
 
 
-@app.route('/login/schedule')
-def schedule():
+@app.route('/schedule/<int:park_id>')
+def schedule(park_id):
 	"""Schedule to find play mate"""
 
-	return render_template("schedule.html")
+	return render_template("schedule.html", park_id = park_id)
 
-@app.route('/login/schedule.json')
-def schedule_process():
+@app.route('/schedule/<int:park_id>/schedule.json')
+def schedule_process(park_id):
 	"""Given the start time and end time query for correlations"""
 	
 	date_start = str(request.args.get("start_date"))
@@ -120,29 +120,48 @@ def schedule_process():
 	end_str = end_str.rstrip()
 	try:
 		start_time = datetime.strptime(start_str,"%a %b %d %Y %H:%M:%S")
-		print "~~~~~~~~~~~~~~~~~~"
-		print start_time
+		# print "~~~~~~~~~~~~~~~~~~"
+		# print start_time
 		end_time = datetime.strptime(end_str,"%a %b %d %Y %H:%M:%S")
-		print "~~~~~~~~~~~~~~~~~~"
-		print end_time
+		# print "~~~~~~~~~~~~~~~~~~"
+		# print end_time
 
 	except ValueError:
 	 	print("Incorrect data format, should be YYYY-MM-DD")
 
-	schedule = Schedule(park_id =108, user_id = session["user_id"], start_time=start_time, end_time=end_time)
-	print "######################"
-	print schedule
-	db.session.add(schedule)
-	db.session.commit()
+	if start_time > datetime.now():
+		schedule = Schedule(park_id =park_id, user_id = session["user_id"], start_time=start_time, end_time=end_time)
+		print "######################"
+		print schedule
+		db.session.add(schedule)
+		db.session.commit()
 
-	return json.dumps(schedule.__dict__)
+		schedule_query = Schedule.query.filter(Schedule.park_id == park_id, Schedule.start_time == start_time).count()-1
+
+		n=1
+		while n < 3:
+			if schedule_query is None:
+				less_start_time = start_time + timedelta(hours = n)
+				add_end_time = end_time - timedelta (hours = n)
+				suggestion_query = Schedule.query.filter(Schedule.park_id == park_id, Schedule.start_time == less_start_time).count()
+				n+=1
+				return jsonify(suggestion_query)
+
+		return jsonify(schedule_query)
+
+	else:
+
+		flash("Try another time slot")
+		return "reschedule"
+
+	
 
 
 @app.route('/logout')
 def logout():
 	"""Log out the user"""
 	session.pop("user_id",None)
-	flash("You've been logged out!")
+	flash("You've logged out!")
 	return redirect('/')
 
 
@@ -158,14 +177,14 @@ def parks_list():
 
 	return render_template("parks_list.html", parks=parks,zipcodes=zipcodes)
 
-@app.route('/<int:park_id>')
+@app.route('/parks/<int:park_id>')
 def report_info(park_id):
 	"""Show parks with ratings and add ratings if user has logged in"""
 	park = Park.query.get(park_id)
 
 	return render_template('park_info.html', park=park)
 
-@app.route('/<int:park_id>/edit')
+@app.route('/parks/<int:park_id>/edit')
 def add_ratings(park_id):
 	"""Add ratings if user has logged in"""
 	clean_score = int(request.args.get("cleanscore"))
