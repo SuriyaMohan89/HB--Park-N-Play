@@ -5,10 +5,11 @@ from jinja2 import StrictUndefined
 from flask import(Flask,render_template, redirect, request, flash, session, url_for)
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model_db import User,Park,Rating,Favorite, connect_to_db,db
+from model_db import User,Park,Rating,Favorite,Schedule,connect_to_db,db
 from sqlalchemy import update
 from flask import jsonify 
 from flask import json
+from datetime import date,time,datetime
 
 
 app = Flask(__name__)
@@ -55,6 +56,12 @@ def register_process():
 	
 	return redirect('/')
 
+@app.route("/login",methods=["GET"])
+def login_form():
+	"""Show Login page"""
+
+	return render_template("login_page.html")
+
 
 @app.route('/login',methods=['POST'])
 def login_process():
@@ -62,7 +69,6 @@ def login_process():
 	login = request.form.get('username')
 	password = request.form.get('password')
 	user = User.query.filter(((User.email == login) | (User.username == login)) & (User.password == password)).first()
-	print user
 	if user:
 		session["user_id"] = user.user_id
 		flash("Successfully Logged In!!")
@@ -70,7 +76,7 @@ def login_process():
 
 	else:
 		flash("Incorrect Login details")
-		return redirect('/')
+		return redirect('/login')
 
 
 @app.route('/login.json')
@@ -82,24 +88,79 @@ def search_park():
 	park_dict = {}
 	if search_park:
 		for park in search_park:
-			park_dict[park.zipcode] = [park.parkname,park.location, park.manager, park.email, park.phone]
+			park_dict[park.zipcode] = [park.park_id,park.parkname,park.location, park.manager, park.email, park.phone]
 	print search_park
 	park_list =[]
 	park_dict = {}
 	if search_park:
 		for park in search_park:
-			temp = [park.parkname,park.location,park.manager,park.email,park.phone]
+			temp = [park.park_id,park.parkname,park.location,park.manager,park.email,park.phone]
 			park_list.append(temp)
+
 		return jsonify(park_list)
 	else:
 		flash('Park not found in zipcode.Try another zipcode')
+
+
+@app.route('/schedule/<int:park_id>')
+def schedule(park_id):
+	"""Schedule to find play mate"""
+
+	return render_template("schedule.html", park_id = park_id)
+
+@app.route('/schedule/<int:park_id>/schedule.json')
+def schedule_process(park_id):
+	"""Given the start time and end time query for correlations"""
+	
+	date_start = str(request.args.get("start_date"))
+	date_end = str(request.args.get("end_date"))
+	start_str = date_start[0:-14]
+	start_str = start_str.rstrip()
+	end_str = date_end[0:-14]
+	end_str = end_str.rstrip()
+	try:
+		start_time = datetime.strptime(start_str,"%a %b %d %Y %H:%M:%S")
+		# print "~~~~~~~~~~~~~~~~~~"
+		# print start_time
+		end_time = datetime.strptime(end_str,"%a %b %d %Y %H:%M:%S")
+		# print "~~~~~~~~~~~~~~~~~~"
+		# print end_time
+
+	except ValueError:
+	 	print("Incorrect data format, should be YYYY-MM-DD")
+
+	if start_time > datetime.now():
+		schedule = Schedule(park_id =park_id, user_id = session["user_id"], start_time=start_time, end_time=end_time)
+		print "######################"
+		print schedule
+		db.session.add(schedule)
+		db.session.commit()
+
+		schedule_query = Schedule.query.filter(Schedule.park_id == park_id, Schedule.start_time == start_time).count()-1
+
+
+		if schedule_query is None:
+			less_start_time = start_time + timedelta(hours = n)
+			add_end_time = end_time - timedelta (hours = n)
+			suggestion_query = Schedule.query.filter(Schedule.park_id == park_id, Schedule.start_time == less_start_time).count()
+			n+=1
+			return jsonify(suggestion_query)
+
+		return jsonify(schedule_query)
+
+	else:
+
+		flash("Try another time slot")
+		return "reschedule"
+
+	
 
 
 @app.route('/logout')
 def logout():
 	"""Log out the user"""
 	session.pop("user_id",None)
-	flash("You've been logged out!")
+	flash("You've logged out!")
 	return redirect('/')
 
 
@@ -107,17 +168,49 @@ def logout():
 @app.route('/parks')
 def parks_list():
 	"""Displays list of parks in San Francisco"""
+	zipcode_list = db.session.query(Park.zipcode).all();
+	zipcode_temp = [zip[0] for zip in zipcode_list]
+	zip_uniq =set(zipcode_temp)
+	zipcodes = list(zip_uniq)
+	parks = Park.query.options(db.joinedload('scores')).order_by(Park.zipcode).all()
 
-	parks = Park.query.order_by(Park.zipcode).all()
+	return render_template("parks_list.html", parks=parks,zipcodes=zipcodes)
 
-	return render_template("parks_list.html", parks=parks)
-
-@app.route('/<int:park_id>')
+@app.route('/parks/<int:park_id>')
 def report_info(park_id):
 	"""Show parks with ratings and add ratings if user has logged in"""
 	park = Park.query.get(park_id)
 
 	return render_template('park_info.html', park=park)
+
+@app.route('/parks/<int:park_id>/edit')
+def add_ratings(park_id):
+	"""Add ratings if user has logged in"""
+	clean_score = int(request.args.get("cleanscore"))
+	equip_score = int(request.args.get("equipscore"))
+	maintain_score = int(request.args.get("maintainscore"))
+	total_score = (clean_score + equip_score + maintain_score)/ float(3)
+
+	rating_score = Rating.query.filter(Rating.park_id == park_id).first()
+	# try except 
+
+	if not rating_score:
+		rate = Rating(park_id = park_id, rating = total_score,reviews = 1)
+		db.session.add(rate)
+
+	else:
+		temp = rating_score.reviews
+		temp_count = rating_score.reviews+1
+		rating_score.reviews = rating_score.reviews+1
+		rating_score.rating = ((rating_score.rating*temp)+total_score)/float(temp_count)
+		rating_score.rating = "{0:.1f}".format(rating_score.rating)
+		rate = Rating(park_id = rating_score.park_id, rating = rating_score.rating, reviews = rating_score.reviews)
+		db.session.add(rate)
+	db.session.commit()
+	flash("Thanks for feedback!!!")
+
+	return redirect("/parks")
+
 
 
 @app.route('/locatepark')

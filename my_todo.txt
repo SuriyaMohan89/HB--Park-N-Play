@@ -60,6 +60,56 @@ HomeWork To Be Done:
 
 >>>>>> Working in json data -parsing - 
 
+<May 21>
+
+>>>>> So Far :
+	Got my Buttons in user info working...
+>>>>> Working on my ratings
+      >> Create dropdown for three reviews in the same page --- SUCCESS
+      >> Work on showing parks grouped based on zip code ---- SUCCESS
+      >> On server side, average three ratings and pass on jsonified result.--- HALF DONE
+      >> Display on park_list page
+
+
+@@@@ Iron clothes done
+@@@@ Find algorithms and send to Alyssa-- SUCCESS
+@@@@ Do hacker rank homework partially done
+@@@@ Take time to revise runtime done
+@@@@ career dev --- make changes to resume, frodo bio, career story
+
+<May 22>
+>>>>> Working ratings and reviews ------ SUCCESS
+>>>>> Add data model for schedule which will be the middle data  
+
+@@@@ White board -- Not done
+@@@@ Hacker Rank -- SUCCESS 
+@@@@ Revise stacks,queue -- SUCCESS
+
+Good calender API to use:
+
+https://github.com/nizarmah/calendar-javascript-lib/blob/master/README.md
+
+https://fullcalendar.io/docs
+
+https://bootsnipp.com/snippets/ZVZZy
+
+<May 23>
+
+>>>>> Show view park link only to login users --- CHANGE OF MIND --
+>>>>> Create button for schedule-- SUCCESS
+for date object
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_date_current
+
+https://codepen.io/magnus16/pen/JdjpNW ############## IMPORTANT
+
+>>>>> click show dropdown time and date 
+>>>>> Change ratings like wise. Have a button ratings and then show options to rate
+>>>>> Likewise add Schedule table and establish relationship
+>>>>> On server side, add schedule to database
+
+@@@@ Problems on stack,queue, more clarification on linked list
+
+
 
 
 

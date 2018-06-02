@@ -1,56 +1,57 @@
+
 {% extends "base.html" %}
+
 {% block content %}
 
 
-<h4> Search park by zipcode </h4>
+<button id ="report" type = "button"> REPORT</button>
+<button id="schedule" type = "button"  > SCHEDULE </button>
+<div class="contactManager"> </div>
+<div class="scheduleEvent"></div>
+<br><br>
 
-<form id ="getInfo" method="get" action="/login.json">
-	<label> Please Enter Zipcode </label>
-	<input type = "text" id = "zipcode" name = "zipcode" pattern="[0-9]{5}">
-	<br>
-	<br>
-	<input  type="submit"  value = "submit">
-</form><br><br>
 
-<div id ="result"></div>
+<div id ="report_result"></div>
+<div id ="schedule_result"></div>
+
 
 <script src="http://code.jquery.com/jquery.js"></script>
 
 <script type="text/javascript">
 	"use strict";
 
-let data;
+	let data;
 
-function displayResult(results){
-			data = results;
-			$('#result').empty();
-			let i=0;
+	function displayResult(results){
+				data = results;
+				$('#report_result').empty();
+				$('#schedule_result').empty();
+				let i=0;
 
-			for (let result of results){
-					$('#result').append(' '+result[0]+' '+result[1]+ '<pre class="tab"></pre>'+
-					`<button id ="button_${i}" value="${result}" type ="button" onClick="displayContact(this)"> Contact Info</button>`+'<br>'+'<br>'+
-						`<div id="div_${i}"></div>`)+'<br>';		
-
-
-    		i++;
-    		}
-    	}
-
-let displayContact= function(param){
-	console.log(param)
-	let p = param.id;
-	p = p.split('_');
-	let id = parseInt(p[1]);
-	console.log(id);
-	$(`#div_${id}`).empty();
-	let result = param.value;
-	result = result.split(",");
-	
-	$(`#div_${id}`).append(result[5]+'<br>'+result[6]+'<br>'+result[7]+'<br>');
+				for (let result of results){
+						$('#report_result').append(' '+result[1]+ '<pre class="tab"></pre>'+	
+						`<button id ="button_${i}" value="${result}" type ="button" onClick="displayContact(this)"> Contact Info</button>`+'<br>'+'<br>'+
+							`<div id="div_${i}"></div>`)+'<br>';	
 
 
 
-}
+	    		i++;
+	    		}
+	    	}
+
+
+	let displayContact= function(param){
+		console.log(param)
+		let p = param.id;
+		p = p.split('_');
+		let id = parseInt(p[1]);
+		console.log(id);
+		$(`#div_${id}`).empty();
+		let result = param.value;
+		result = result.split(",");
+		
+		$(`#div_${id}`).append(result[6]+'<br>'+result[7]+'<br>'+result[8]+'<br>');
+	}
 
 
 	function sendZipcode(evt){
@@ -58,9 +59,69 @@ let displayContact= function(param){
 		$.get("/login.json",{"zipcode" : $('#zipcode').val()},displayResult);
 	}
 
-			$("#getInfo").on("submit", sendZipcode);
 
+	function displayFormReport() {
+		$('#report_result').empty();
+		$('#schedule_result').empty();
+		$(".scheduleEvent").empty();
+
+		$(".contactManager").html("<h2> Report Any Complaints Finding Manager Contact Info</h2><h4> Search park by zipcode </h4>  <form id ='getInfo' method='get' action='/login.json'>  <label> Please Enter Zipcode </label>  <input type = 'text' id = 'zipcode' name = 'zipcode' pattern='[0-9]{5}''>  <br> <br>  <input  id='zipcode-form' type='submit' value = 'submit'>  </form>  <br>  <br>");
+
+		let formSubmit = document.querySelector('#zipcode-form');
+		formSubmit.addEventListener("click", sendZipcode);
+
+	}
+
+
+	function displayParks(results){
+		data = results;
+	
+		$('#report_result').empty();
+		$('#schedule_result').empty();
+		$(".contactManager").empty();
+		let i=0;
+
+		for (let result of results){
+			$('#schedule_result').append( `<a href ='/schedule/${result[0]}'>${result[1]}</a>`+'<br>'+'<br>')
+		}
+	}
+
+	function sendZipcode1(evt){
+		evt.preventDefault();
+		$.get("/login.json",{"zipcode" : $('#zipcode').val()},displayParks);
+	}
+
+
+
+
+
+	function displayFormSchedule(){
+		$(".contactManager").empty();
+		$('#report_result').empty();
+		$('#schedule_result').empty();
+		
+		$(".scheduleEvent").html("<h2> Searck park for schedule</h2><h4> Search park by zipcode </h4> <form id ='getInfo1' method='get' action='/login.json'>  <label> Please Enter Zipcode </label> <input type = 'text' id = 'zipcode' name = 'zipcode' pattern='[0-9]{5}''>  <br> <br>  <input  id='zipcode-form1' type='submit' value = 'submit'>  </form>  <br><br>");
+
+		let formSchedule = document.querySelector("#zipcode-form1");
+		formSchedule.addEventListener("click",sendZipcode1)
+	}
+
+	let reportButton = document.querySelector('#report');
+	let scheduleButton = document.querySelector('#schedule');
+
+	reportButton.addEventListener("click",displayFormReport);
+	scheduleButton.addEventListener("click", displayFormSchedule);
+
+
+	// $('#schedule').click(function(){
+   // window.location.href='http://localhost:5000/login/schedule/`name`;
+
+// })
+   
 </script>
+
+
+
 
 
 {% endblock %}

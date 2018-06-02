@@ -2,6 +2,7 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 
 
@@ -66,13 +67,13 @@ class Rating(db.Model):
 
     rating_id = db.Column(db.Integer,autoincrement=True,primary_key=True)
     park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
-    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
-    cleanliness_score = db.Column(db.Integer,nullable=False)
-    equipment_score = db.Column(db.Integer,nullable=False)
-    overall_score = db.Column(db.Integer,nullable=False)
+    # user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
+    rating = db.Column(db.Float,nullable=False)
+    reviews = db.Column(db.Integer,nullable=False)
 
-    user = db.relationship("User",backref=db.backref("scores",order_by=rating_id))
-    park = db.relationship("Park",backref=db.backref("scores",order_by=rating_id))
+
+    # user = db.relationship("User",backref=db.backref("scores",order_by=rating_id))
+    park = db.relationship("Park",backref=db.backref("scores"))
 
     
 
@@ -81,10 +82,38 @@ class Rating(db.Model):
     def __repr__(self):
         """ For printing in Terminal,helps debugging"""
 
-        return "<Rating rating_id={} park_id={} user_id={} score={}>".format(self.rating_id,
+        return "<Rating rating_id={} park_id={} rating={}>".format(self.rating_id,
+                                                                        self.park_id,
+                                                                        self.rating)
+
+
+class Schedule(db.Model):
+    """ Show scheduled time by user"""
+    __tablename__="scheduler"
+
+    schedule_id = db.Column(db.Integer, autoincrement=True,primary_key=True)
+    park_id = db.Column(db.Integer,db.ForeignKey('parks.park_id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.user_id'))
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime,nullable=False)
+
+    user = db.relationship("User",backref=db.backref("schedule",order_by=schedule_id))
+    park = db.relationship("Park",backref=db.backref("schedule",order_by=schedule_id))
+
+
+
+    def __repr__(self):
+        """ For printing in Terminal,helps debugging"""
+
+        return "<Schedule schedule_id={} park_id={} user_id={} start_time={}>".format(self.schedule_id,
                                                                         self.park_id,
                                                                         self.user_id,
-                                                                        self.score)
+                                                                        self.start_time)
+
+
+
+
+
 
 
 
@@ -112,6 +141,12 @@ class Favorite(db.Model):
                                                                                     self.park_id,
                                                                                     self.user_id,
                                                                                     self.is_favorite)
+
+
+
+
+
+
 
         ##############################################################################################################
 # Helper functions

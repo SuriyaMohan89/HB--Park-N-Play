@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h4>Select Park By Zipcode</h4> 
+
+
+
+<input id = "parkid" type="text" value="{{ park_id }}" hidden>
+
+
+
+<form >
+	<h3> Choose Date</h3>
+   <input type="date" id="date" data-format="DD-MM-YYYY ">
+
+<br><br>
+<H4>Choose Start Time</H4>
+<div>
+ <select id ="starttime">
+  <option value="09:00">09:00</option>
+  <option value="10:00">10:00</option>
+  <option value="11:00">11:00</option>
+  <option value="12:00">12:00</option>
+  <option value="13:00">13:00</option>
+  <option value="14:00">14:00</option>
+  <option value="15:00">15:00</option>
+  <option value="16:00">16:00</option>
+  <option value="17:00">17:00</option>
+  <option value="18:00">18:00</option>
+  <option value="19:00">19:00</option>
+</select><br><br>
+
+
+<H4>Choose End Time</H4>
+<div>
+ <select id="endtime">
+  <option value="10:00">10:00</option>
+  <option value="11:00">11:00</option>
+  <option value="12:00">12:00</option>
+  <option value="13:00">13:00</option>
+  <option value="14:00">14:00</option>
+  <option value="15:00">15:00</option>
+  <option value="16:00">16:00</option>
+  <option value="17:00">17:00</option>
+  <option value="18:00">18:00</option>
+  <option value="19:00">19:00</option> 
+  <option value="20:00">09:00</option>
+
+</select><br><br>
+<input id ="submitform" type = "submit" value="submit">
+</div>
+</form><br><br>
+<div id ="Reschedule"></div>
+<div id = "ScheduleCount"> </div>
+
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script  type="text/javascript">
+  "use strict"
+ 
+  // console.log(endTime);
+  function displayResults(results){
+    if (results == "reschedule"){
+      $("#Reschedule").html("Try Reschedule")
+    }
+    if ((results != "reschedule") && (results > 0)) {
+    $("#Reschedule").empty()
+    $("#ScheduleCount").html(`<p> You have ${results} many children playing at that time</p>`)
+  }
+}
+
+  function sendTime(evt){
+  evt.preventDefault();
+  let date = document.getElementById("date").value;
+  console.log(date);
+  let startTemp = $("#starttime :selected").text();
+  console.log(startTemp);
+  let endTemp = $("#endtime :selected").text();
+  console.log(endTemp);
+  let startTime = new Date(date+" "+startTemp);
+  let endTime = new Date(date+" "+endTemp)
+  console.log(startTime);
+  let parkId = document.getElementById("parkid").value;
+    $.get(`/schedule/${parkId}/schedule.json`,{"start_date" : startTime, "end_date" : endTime},displayResults);
+  }
+
+  $("#submitform").on("click",sendTime);
+
+
+</script>
+
+{% endblock %}

@@ -4,6 +4,44 @@
 
 <h1> {{ park.parkname}}</h1>
 
+<h3> Add Ratings </h3>
+<h4> Rate for cleanliness</h4>
+<form action="/parks/{{ park.park_id }}/edit">
+	<select name="cleanscore">
+	<option id = "5" value = "5">5</option>
+	<option id = "4" value = "4">4</option>
+	<option id = "3" value = "3">3</option>
+	<option id = "2" value = "2">2</option>
+	<option id = "1" value = "1">1</option>
+
+	</select>
+
+
+<h4> Rate for availablitiy of Play equipments </h4>
+
+
+	<select name ="equipscore">
+		<option id = "5" value = "5">5</option>
+		<option id = "4" value = "4">4</option>
+		<option id = "3" value = "3">3</option>
+		<option id = "2" value = "2">2</option>
+		<option id = "1" value = "1">1</option>
+
+	</select>
+
+<h4> Rate for Maintainence</h4>
+
+
+	<select name ="maintainscore">
+		<option id = "5" value = "5">5</option>
+		<option id = "4" value = "4">4</option>
+		<option id = "3" value = "3">3</option>
+		<option id = "2" value = "2">2</option>
+		<option id = "1" value = "1">1</option>
+
+	</select><br><br>
+	<input type="submit" value="Submit">
+</form>
 
 
 
