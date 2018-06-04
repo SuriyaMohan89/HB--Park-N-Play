@@ -204,6 +204,8 @@ def add_ratings(park_id):
 		rating_score.reviews = rating_score.reviews+1
 		rating_score.rating = ((rating_score.rating*temp)+total_score)/float(temp_count)
 		rating_score.rating = "{0:.1f}".format(rating_score.rating)
+		print "!!!!!!!!!!!!!!!"
+		print rating_score.rating
 		rate = Rating(park_id = rating_score.park_id, rating = rating_score.rating, reviews = rating_score.reviews)
 		db.session.add(rate)
 	db.session.commit()
