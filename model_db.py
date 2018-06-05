@@ -151,11 +151,11 @@ class Favorite(db.Model):
         ##############################################################################################################
 # Helper functions
 
-def connect_to_db(app):
+def connect_to_db(app, default='postgresql:///childrenparks'):
     """Connect the database to our Flask app"""
 
     #configuration for using PostgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///childrenparks'
+    app.config['SQLALCHEMY_DATABASE_URI'] = default
     # Logs all information issued to stderr useful for debugging
     app.config['SQLALCHEMY_ECHO'] = True
     # Tracks all modifications of objects but consumes memory set false
