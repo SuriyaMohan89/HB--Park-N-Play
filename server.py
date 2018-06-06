@@ -87,12 +87,6 @@ def search_park():
     """ Search park by zipcode for ratings."""
     zipcode = int(request.args.get('zipcode'))
     search_park = Park.query.filter(Park.zipcode == zipcode).all()
-
-    park_dict = {}
-    if search_park:
-        for park in search_park:
-            park_dict[park.zipcode] = [park.park_id,park.parkname,park.location, park.manager, park.email, park.phone]
-    print search_park
     park_list =[]
     park_dict = {}
     if search_park:
@@ -102,7 +96,7 @@ def search_park():
 
         return jsonify(park_list)
     else:
-        flash('Park not found in zipcode.Try another zipcode')
+        return "Park not found. Try another zipcode"
 
 
 @app.route('/schedule/<int:park_id>')
@@ -138,10 +132,9 @@ def schedule_process(park_id):
 
 
         if schedule_query is None:
-            less_start_time = start_time + timedelta(hours = n)
-            add_end_time = end_time - timedelta (hours = n)
+            less_start_time = start_time - timedelta(hours = 3)
+            add_end_time = end_time + timedelta (hours = 3)
             suggestion_query = Schedule.query.filter(Schedule.park_id == park_id, Schedule.start_time == less_start_time).count()
-            n+=1
             return jsonify(suggestion_query)
 
         return jsonify(schedule_query)
@@ -187,15 +180,7 @@ def report_info(park_id):
 
 @app.route('/parks/<int:park_id>/edit')
 def add_ratings(park_id):
-    """Add ratings if user has logged in
-
-        >>> clean_score = 5
-        >>> equip_score = 4
-        >>> maintain_score = 4
-        >>> total_score
-
-        4.333333333333333
-        """
+    """Add ratings if user has logged In"""
 
     clean_score = int(request.args.get("cleanscore"))
     equip_score = int(request.args.get("equipscore"))
@@ -222,7 +207,6 @@ def add_ratings(park_id):
     flash("Thanks for feedback!!!")
 
     return redirect("/parks")
-
 
 
 @app.route('/locatepark')

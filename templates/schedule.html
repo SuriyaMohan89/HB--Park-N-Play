@@ -81,6 +81,7 @@
   let startTime = new Date(date+" "+startTemp);
   let endTime = new Date(date+" "+endTemp)
   console.log(startTime);
+  console.log(endTime);
   let parkId = document.getElementById("parkid").value;
     $.get(`/schedule/${parkId}/schedule.json`,{"start_date" : startTime, "end_date" : endTime},displayResults);
   }

@@ -3,7 +3,7 @@
 
 {% block content %}
 
-
+<div id="EmptyZip"> </div>
 <button id ="report" type = "button"> REPORT</button>
 <button id="schedule" type = "button"  > SCHEDULE </button>
 <div class="contactManager"> </div>
@@ -24,6 +24,11 @@
 
 	function displayResult(results){
 				data = results;
+				if (typeof(results) === "string"){
+					$('#EmptyZip').html(results)
+				}
+				else{
+				$('#EmptyZip').empty();
 				$('#report_result').empty();
 				$('#schedule_result').empty();
 				let i=0;
@@ -38,6 +43,7 @@
 	    		i++;
 	    		}
 	    	}
+	    }
 
 
 	let displayContact= function(param){
@@ -75,7 +81,11 @@
 
 	function displayParks(results){
 		data = results;
-	
+		if (typeof(results) === "string"){
+			$('#EmptyZip').html(results)
+		}
+		else{
+		$('#EmptyZip').empty();
 		$('#report_result').empty();
 		$('#schedule_result').empty();
 		$(".contactManager").empty();
@@ -85,6 +95,7 @@
 			$('#schedule_result').append( `<a href ='/schedule/${result[0]}'>${result[1]}</a>`+'<br>'+'<br>')
 		}
 	}
+}
 
 	function sendZipcode1(evt){
 		evt.preventDefault();
