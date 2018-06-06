@@ -1,6 +1,58 @@
 {% extends 'base.html' %}
 {% block title %}Park Info{% endblock %}
 {% block content %}
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <style>
+        .stars {
+          /* remove inline-block whitespace */
+          font-size: 0;
+          /* flip the order so we can use the + and ~ combinators */
+          unicode-bidi: bidi-override;
+          direction: rtl;
+          /* the hidden clearer */
+        }
+        .stars * {
+          font-size: 2rem;
+        }
+        .stars > input {
+          display: none;
+        }
+        .stars > input + label {
+          /* only enough room for the star */
+          display: inline-block;
+          width: 1em;
+          white-space: nowrap;
+          cursor: pointer;
+        }
+        .stars > input + label:before {
+          display: inline-block;
+          content: "☆";
+          color: #888;
+        }
+        .stars > input:checked ~ label:before, .stars > input + label:hover ~ label:before, .stars > input + label:hover:before {
+          content: "★";
+          color: #e52;
+          text-shadow: 0 0 1px #333;
+        }
+        .stars > .stars-clear + label {
+          width: .5em;
+          margin-left: -.5em;
+        }
+        .stars > .stars-clear + label:before {
+          width: .5em;
+        }
+        .stars:hover > input + label:before {
+          content: "☆";
+          color: #888;
+          text-shadow: none;
+        }
+        .stars:hover > input + label:hover ~ label:before, .stars:hover > input + label:hover:before {
+          content: "★";
+          color: yellow;
+          text-shadow: 0 0 1px #333;
+        }
+    </style>
 
 <h3> Add Ratings </h3>
 
@@ -10,39 +62,40 @@
 
 <h4> Rate for cleanliness</h4>
 <form action="/parks/{{ park.park_id }}/edit">
-	<select name="cleanscore">
-	<option id = "5" value = "5">5</option>
-	<option id = "4" value = "4">4</option>
-	<option id = "3" value = "3">3</option>
-	<option id = "2" value = "2">2</option>
-	<option id = "1" value = "1">1</option>
+	<span class = "stars">
+	<input type="radio" id="field-id-5" data-id="field-id" name="cleanscore" value="5" /><label for="field-id-5"></label>
+	<input type="radio" id="field-id-4" data-id="field-id" name="cleanscore" value="4" /><label for="field-id-4"></label>
+	<input type="radio" id="field-id-3" data-id="field-id" name="cleanscore" value="3" /><label for="field-id-3"></label>
+	<input  type="radio" id="field-id-2" data-id="field-id" name="cleanscore" value="2" /><label for="field-id-2"></label>
+	<input type="radio" id="field-id-1" data-id="field-id" name="cleanscore" value="1" /><label for="field-id-1"></label>
 
-	</select>
+</span>
 
 
 <h4> Rate for availablitiy of Play equipments </h4>
 
 
-	<select name ="equipscore">
-		<option id = "5" value = "5">5</option>
-		<option id = "4" value = "4">4</option>
-		<option id = "3" value = "3">3</option>
-		<option id = "2" value = "2">2</option>
-		<option id = "1" value = "1">1</option>
+	<span class = "stars">
+	<input type="radio" id="field-id-5-1" data-id="field-id" name="equipscore" value="5" /><label for="field-id-5-1"></label>
+	<input type="radio" id="field-id-4-1" data-id="field-id" name="equipscore" value="4" /><label for="field-id-4-1"></label>
+	<input type="radio" id="field-id-3-1" data-id="field-id" name="equipscore" value="3" /><label for="field-id-3-1"></label>
+	<input  type="radio" id="field-id-2-1" data-id="field-id" name="equipscore" value="2" /><label for="field-id-2-1"></label>
+	<input type="radio" id="field-id-1-1" data-id="field-id" name="equipscore" value="1" /><label for="field-id-1-1"></label>
 
-	</select>
+</span>
 
 <h4> Rate for Maintainence</h4>
 
 
-	<select name ="maintainscore">
-		<option id = "5" value = "5">5</option>
-		<option id = "4" value = "4">4</option>
-		<option id = "3" value = "3">3</option>
-		<option id = "2" value = "2">2</option>
-		<option id = "1" value = "1">1</option>
+	<span class = "stars">
+	<input type="radio" id="field-id-5-2" data-id="field-id" name="maintainscore" value="5" /><label for="field-id-5-2"></label>
+	<input type="radio" id="field-id-4-2" data-id="field-id" name="maintainscore" value="4" /><label for="field-id-4-2"></label>
+	<input type="radio" id="field-id-3-2" data-id="field-id" name="maintainscore" value="3" /><label for="field-id-3-2"></label>
+	<input  type="radio" id="field-id-2-2" data-id="field-id" name="maintainscore" value="2" /><label for="field-id-2-2"></label>
+	<input type="radio" id="field-id-1-2" data-id="field-id" name="maintainscore" value="1" /><label for="field-id-1-2"></label>
 
-	</select><br><br>
+</span>
+	<br><br>
 	<input type="submit" value="Submit">
 </form>
 
