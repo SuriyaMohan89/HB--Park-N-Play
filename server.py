@@ -111,17 +111,19 @@ def schedule_process(park_id):
     
     date_start = str(request.args.get("start_date"))
     date_end = str(request.args.get("end_date"))
-    start_str = date_start[0:-14]
+    start_str = date_start[0:-32]
     start_str = start_str.rstrip()
-    end_str = date_end[0:-14]
+    print start_str
+    end_str = date_end[0:-32]
     end_str = end_str.rstrip()
+    print end_str
     try:
         start_time = datetime.strptime(start_str,"%a %b %d %Y %H:%M:%S")
 
         end_time = datetime.strptime(end_str,"%a %b %d %Y %H:%M:%S")
 
     except ValueError:
-        print("Incorrect data format, should be YYYY-MM-DD")
+        return ("Incorrect data format, should be YYYY-MM-DD")
 
     if start_time > datetime.now():
         schedule = Schedule(park_id =park_id, user_id = session["user_id"], start_time=start_time, end_time=end_time)
