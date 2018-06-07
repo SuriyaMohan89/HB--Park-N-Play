@@ -4,7 +4,12 @@
 
 {% block content %}
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+    color: orange;
+}
+</style>
 
 <h3>Parks</h3>
 <h3> Click Link To Rate A Park</h3>
@@ -14,7 +19,8 @@
 	<h4><b>{{ zipcode}}</b></h4>
 	{% for park in parks %}
 	{% if park.zipcode == zipcode %} <br>
-	<li> <a href="/parks/{{ park.park_id }}">{{ park.parkname }} {% if park.scores %} {{ park.scores[0].rating| int }} {{ park.scores[0].reviews  }} {% endif %}</a>
+	<li> <a href="/parks/{{ park.park_id }}">{{ park.parkname }}</a>{% if park.scores %} {% for i in range (park.scores[0].rating | int) %}<span class="fa fa-star checked"></span> {% endfor %}
+ {{ park.scores[0].reviews  }} reviews {% endif %}
 	</li>
 	{% endif %}
 	{% endfor %}
