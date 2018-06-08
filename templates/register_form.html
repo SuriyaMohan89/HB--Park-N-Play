@@ -6,22 +6,33 @@
 <br><br>
 
 <form action="/register", method='POST'>
-	<label>Username</label>
-	<input type="text" name="username"  pattern="[a-z]{1,15}"
-        title="Username should only contain lowercase letters."><br><br>
+	<div class="form-group">
+		<label for="exampleFormControlInput1">Username</label>
+		<input type="text" name="username" class="form-control" id="exampleFormControlInput1" placeholder="Username"
+  		 pattern="[a-z]{1,15}"
+        title="Username should only contain lowercase letters.">
+    </div>
 	
-	<label>Email</label>
-	<input type="email" name="email"><br><br>
+	<div class="form-group">
+		<label for="exampleFormControlInput1" >Email</label>
+		<input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+	</div>
 
-	<label>Password </label>
-	<input type="password" name="password1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"><br><br>
+	<div class="form-group">
+		<label for="exampleFormControlInput1" >Password </label>
+		<input type="password" name="password1"  class="form-control" id="exampleFormControlInput1" placeholder="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+	</div>
 
-	<label>Confirm Password </label>
-	<input type="password" name="password2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"><br><br>
-	<label>Zipcode </label>
-	<input type="text" name="zipcode"><br><br>
+	<div class="form-group">
+		<label for="exampleFormControlInput1" >Confirm Password </label>
+		<input type="password" name="password2"  class="form-control" id="exampleFormControlInput1" placeholder="Re-type password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+	</div>
 
-	<input type="submit" value="submit">
+	<div class="form-group">
+		<label for="exampleFormControlInput1">Zipcode </label>
+		<input type="text" name="zipcode" class="form-control" id="exampleFormControlInput1" placeholder="zipcode" >
+<br><br>
+			<button type="submit" value="submit" class="btn btn-primary">Submit</button>
 
 </form>
 </div>
