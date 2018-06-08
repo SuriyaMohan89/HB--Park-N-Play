@@ -10,34 +10,63 @@
 
 </head>
 <style type="text/css">
-	.HeaderColor {
-    background-color: blue;
+/*.pattern{
+  background: url("../static/memphis-colorful.png") no-repeat center center;
+  height:100%;
+}*/
+
+.container-fluid {
+    background: url("../static/memphis-colorful.png") repeat center center;
+    /*background-color: red;*/
+    /*background-size: cover;*/
+}
+	.navbar-light .navbar-brand {
+    color: #e9ecef;
+}
+nav.navbar.navbar-light.navbar-expand-lg {
+    padding: 0;
+    height: 100px;
+    padding-top: 0;
+}
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   height: 110px;
+   width: 100%;
+   background-color: #0ab173c4;
+   color: white;
+   text-align: center;
 }
 </style>
 
+
 <body>
 
-		<nav class="navbar navbar-dark bg-primary">
-  <a class="navbar-brand" href="http://localhost:5000/">Social N Park </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="http://localhost:5000/parks">Parks <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="http://localhost:5000/login?">Login</a>
-      </li>
-        <li class="nav-item active">
-        <a class="nav-link" href="http://localhost:5000/register?"><button type="button" class="btn btn-success">Sign Up</button></a>
-      </li>
-    </ul>
-  </div>
-</nav>
-</div>
+	<nav class="navbar navbar-light navbar-expand-lg" 
+                style="background-color:#0ab173c4;">
+  			<a class="navbar-brand" href="http://localhost:5000/">Social N Park </a>
+  		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    	   <span class="navbar-toggler-icon"></span>
+  		  </button>
+
+  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    	<ul class="navbar-nav ml-auto">
+    		<li class="nav-item active">
+      		<a class="nav-link" href="http://localhost:5000/parks">Parks</a>
+    		</li>
+    		<li class="nav-item active">
+      		<a class="nav-link" href="http://localhost:5000/login?">Login</a>
+    		</li>
+      	<li class="nav-item active">
+      		<a class="nav-link" href="http://localhost:5000/register?"><button type="button" class="btn btn-primary btn-lg round" style="padding:0";" background-color: #7FFFD4">Sign Up</button></a>
+    		</li>
+    	</ul>
+    </div>
+  </nav>
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -45,16 +74,20 @@
 
 	{% with messages = get_flashed_messages() %}
 	{% if messages %}
-	<ul class=flashes>
+	<ul class="flashes">
 		{% for message in messages %}
 		<li>{{ message }}</li>
 		{% endfor %}
 	</ul>
 	{% endif %}
 	{% endwith %}
+<!-- <div class = "container-fluid"> -->
 	{% block content %} 
 	
-	{% endblock %} 
-
+	{% endblock %}
+<!-- </div> -->
 </body>
+<footer class="footer">
+  <p><center>"Supporting children to play requires us to remember what life is all about. It’s not about getting from A-Z, but rather dreaming beyond both."</center></p><p><center>Vince Gowmon</center> </p>
+</footer>
 </html>

@@ -3,44 +3,62 @@
 {% block title %}Locate Park {% endblock %}
 
 {% block content %}
+<style type="text/css">
+	#map{height : 500px;
+		}
+</style>
+<div class = "container-fluid" style="height: 1000px">
+	 <!-- <div class="container"> -->
+	 <!-- <span class="align-middle"> -->
 
-<h3>Parks In The Zipcode</h3>
+    <div class="row" style="padding-top:5%">
+    	<div class="col-4" style="width: 200px;">
+		<h3>Parks In The Zipcode</h3>
 
-	<ul>
+		<ul>
 		{% if locatepark %}
 		{% for park in locatepark %}<br>
-		<li > {{ park.parkname}} {{ park.location }}
+			<li> {{ park.parkname}} {{ park.location }}
 			<!-- <div id="locate"> </div> -->
 			<input type="hidden" class="coordinates" value= "{{ park.latitude }} {{ park.longitude }} {{ park.parkname }}" >
 
-		 </li>
+		 	</li>
 		{% endfor %}
-	</ul>
+		</ul>
 
-	<ul>
+		<ul>
 		{% else %}
 		<h2>Suggestions for near by park</h2>
 		{% for park in zipcode_list %}<br>
-		<li>{{ park[0].parkname }} {{ park[0].location }} {{ park[0].zipcode }}
+			<li>{{ park[0].parkname }} {{ park[0].location }} {{ park[0].zipcode }}
 			<input type="hidden" class="coordinates" value= "{{ park[0].latitude }} {{ park[0].longitude }} {{ park[0].parkname }}" >
 
-		</li>
+			</li>
 		{% endfor %}
 		{% endif %}
 
 
-	</ul>
+		</ul>
+		</div>
+<!-- </div> -->
 	
 
-	<style type="text/css">
+		 <div class="col-8">
+
+			<div id="map"></div>
+		</div>
+	</div>
+	<!-- </span> -->
+</div>
+
+	<!-- <style type="text/css">
 		html, body { height: 85%; margin: 0; padding: 0; }
 		#map { height: 100%; }
-	</style>
+	</style> -->
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA36jAyNnRFdeH8dWD_yaqNHqXQq7wVcWo">
      </script>
-	<div id="map"></div>
-
+	
 	<script type="text/javascript">
 		"use strict";
 		let coordinates = document.querySelectorAll(".coordinates");
