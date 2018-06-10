@@ -2,7 +2,24 @@
 
 {% block content %}
 <div class = "container-fluid" style="height: 1000px">
+<link href="https://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps:700" rel="stylesheet">
 <style type="text/css">
+.col-4{font-family: 'Oleo Script Swash Caps', cursive;
+color:#044827d9 }
+
+.large_width
+{
+  height:30px;
+  width:65%;
+}
+.form-control{
+	color:#1b4e13cf;
+}
+form .form-control::-moz-placeholder {
+  color: #1b4e13cf;
+  background-color: #78a54fe0;
+}
+
 
 </style>
 
@@ -31,15 +48,15 @@
 </div>
   </div>
  
-<div class="col-4">
+<div class="col-4 ">
 	<br><br>
-<h2> Locate Park </h2>
-<form action="/locatepark">
-	<label> Please Enter Zipcode </label>
-	<input type = "text" name = "zipcode" pattern="[0-9]{5}">
+
+<form class="form-control" action="/locatepark">
+	<center><h2> Locate Park </h2></center><br>
+	<center><input class = "large_width tall_height"  type = "text" name = "zipcode" pattern="[0-9]{5}" placeholder=" Please Enter a valid Zipcode"></center>
 	<br>
 	<br>
-	<input type="submit"  value = "submit">
+	<center><input class="btn btn-primary" type="submit"  value = "search" ></center>
 </form><br><br>
 
  </div>
