@@ -1,9 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style type="text/css">
+html { overflow-y: hidden}
+	.btn-primary {
+    /* color: #fff; */
+    background-color: #d600bcbd;
+    border-color: #25a51c;
+    margin: auto;
+}
+</style>
 <div class = "container-fluid" style="height:950px">
 
 <br><br>
+
+<div class= "col-4 mx-auto" >
+	<h3>Register Form </h3><br><br>
 
 <form action="/register", method='POST'>
 	<div class="form-group">
@@ -32,9 +44,11 @@
 		<label for="exampleFormControlInput1">Zipcode </label>
 		<input type="text" name="zipcode" class="form-control" id="exampleFormControlInput1" placeholder="zipcode" >
 <br><br>
-			<button type="submit" value="submit" class="btn btn-primary">Submit</button>
+			<center><button type="submit" value="submit" class="btn btn-primary ">Submit</button></center>
+
 
 </form>
+</div>
 </div>
 {% endblock %}
 
