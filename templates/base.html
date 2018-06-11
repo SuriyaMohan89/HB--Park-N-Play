@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html >
-<head>
+
+
+<header>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}Childrenpark {% endblock %}</title>
@@ -8,12 +10,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-</head>
+</header>
 <style type="text/css">
-/*.pattern{
-  background: url("../static/memphis-colorful.png") no-repeat center center;
-  height:100%;
-}*/
+/*font-family: 'Bangers', cursive;*/
+/*html, body {
+height: 800px;
+}*/html{
+  overflow: scroll;
+}
 
 .container-fluid {
     background: url("../static/memphis-colorful.png") repeat center center;
@@ -32,11 +36,12 @@ nav.navbar.navbar-light.navbar-expand-lg {
    position: fixed;
    left: 0;
    bottom: 0;
-   height: 110px;
+   height: 60px;
    width: 100%;
    background-color: #0ab173c4;
    color: white;
    text-align: center;
+  display: inline-block;
 }
 </style>
 
@@ -46,7 +51,7 @@ nav.navbar.navbar-light.navbar-expand-lg {
 
 	<nav class="navbar navbar-light navbar-expand-lg" 
                 style="background-color:#0ab173c4;">
-  			<a class="navbar-brand" href="http://localhost:5000/">Play N Park </a>
+  			<a class="navbar-brand" href="http://localhost:5000/">SocialIN Park </a>
   		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     	   <span class="navbar-toggler-icon"></span>
   		  </button>

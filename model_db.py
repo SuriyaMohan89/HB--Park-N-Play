@@ -28,10 +28,10 @@ class User(db.Model):
 
 
 
-    def __repr__(self):
+    def __repr__(self): 
         """ For printing in Terminal,helps debugging"""
 
-        return"<User user_id={} username={} email={} zipcode={}>".format(self.user_id,self.username,self.email,self.zipcode)
+        return"<User user_id={} username={} email={} zipcode={}>".format(self.user_id,self.username,self.email,self.zipcode) #pragma: no cover
 
 
 
@@ -56,7 +56,7 @@ class Park(db.Model):
     def __repr__(self):
               """ For printing in Terminal,helps debugging"""
 
-              return "<Park park_id={} parkname={} zipcode={}>".format(self.park_id,self.parkname,self.zipcode)
+              return "<Park park_id={} parkname={} zipcode={}>".format(self.park_id,self.parkname,self.zipcode) #pragma: no cover
 
 
 
@@ -84,7 +84,7 @@ class Rating(db.Model):
 
         return "<Rating rating_id={} park_id={} rating={}>".format(self.rating_id,
                                                                         self.park_id,
-                                                                        self.rating)
+                                                                        self.rating) #pragma: no cover
 
 
 class Schedule(db.Model):
@@ -102,7 +102,7 @@ class Schedule(db.Model):
 
 
 
-    def __repr__(self):
+    def __repr__(self):#pragma: no cover
         """ For printing in Terminal,helps debugging"""
 
         return "<Schedule schedule_id={} park_id={} user_id={} start_time={}>".format(self.schedule_id,
@@ -134,13 +134,13 @@ class Favorite(db.Model):
 
 
     
-    def __repr__(self):
+    def __repr__(self):#pragma: no cover
         """ For printing in Terminal,helps debugging"""
 
         return "<Favorite favorite_id={} park_id={} user_id={} is_favorite={}>".format(self.favorite_id,
                                                                                     self.park_id,
                                                                                     self.user_id,
-                                                                                    self.is_favorite)
+                                                                                    self.is_favorite) #pragma: no cover
 
 
 

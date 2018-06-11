@@ -15,12 +15,29 @@ color:#044827d9 }
 .form-control{
 	color:#1b4e13cf;
 }
-form .form-control::-moz-placeholder {
+/*.form-control::-moz-placeholder {
   color: #1b4e13cf;
   background-color: #78a54fe0;
+}*/
+.btn-primary {
+    color: #fff;
+    background-color: #e2159f8a;
+    border-color: #020e1a;
 }
 
-
+button, input, optgroup, select, textarea {
+    color: chocolate;
+    margin: 0;
+    font-family: cursive;
+    /* font-size: inherit; */
+    line-height: inherit;
+}
+form{
+  margin-top: 6.5rem;
+}
+.col-8{
+  padding-left: 0;
+}
 </style>
 
 <div class="row">
@@ -31,7 +48,7 @@ form .form-control::-moz-placeholder {
       <img class="d-block w-100" src="https://joaca.atlassport.ro/wp-content/uploads/2017/02/kids_running.jpg" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="https://www.royalparks.org.uk/__data/assets/image/0010/42130/climbing-net.jpg" alt="Second slide">
+      <img class="d-block w-100" src="http://www.newkidscenter.com/images/10415430/happy%20children.jpg" alt="Second slide">
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="http://old.slovenskenovice.si/sites/slovenskenovice.si/files/styles/s_1280_1024/public/dti_import/2015/05/08/image_13337935_0.jpg?itok=oeeSY3K1" alt="Third slide">
@@ -45,21 +62,21 @@ form .form-control::-moz-placeholder {
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
+ </div>
   </div>
  
 <div class="col-4 ">
 	<br><br>
 
-<form class="form-control" action="/locatepark">
-	<center><h2> Locate Park </h2></center><br>
+  <form  action="/locatepark">
+	<center><h2> Locate Park In Map</h2></center><br>
 	<center><input class = "large_width tall_height"  type = "text" name = "zipcode" pattern="[0-9]{5}" placeholder=" Please Enter a valid Zipcode"></center>
 	<br>
 	<br>
 	<center><input class="btn btn-primary" type="submit"  value = "search" ></center>
-</form><br><br>
+ </form><br><br>
 
- </div>
+</div>
 </div>
 
 

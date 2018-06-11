@@ -286,15 +286,16 @@ if __name__ == "__main__":
 
 
     # Set debug true so debug tool bar extension
-    app.debug = True
+    app.debug = True #pragma: no cover
     # templates are not cached in debug mode
+    app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
-    app.jinja_env.auto_reload = app.debug
+    app.jinja_env.auto_reload = app.debug #pragma: no cover
 
-    connect_to_db(app)
+    connect_to_db(app)#pragma: no cover
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
-    app.run(port=5000, host='0.0.0.0')
+    # DebugToolbarExtension(app)#pragma: no cover
+    app.run(port=5000, host='0.0.0.0')#pragma: no cover
 
 
 

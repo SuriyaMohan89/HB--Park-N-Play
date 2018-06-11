@@ -30,8 +30,8 @@ class FlaskTestsBasic(TestCase):
         user1 = User(user_id = 2, username = "maxwell73", email = "danielle29@gmail.com", password = "Test123$", zipcode = "49443")
         user2 = User(user_id = 3, username = "swu ", email = "chasehenry@yahoo.com", password = "Test123$", zipcode = "90869")
         rating1 = Rating(rating_id =2, park_id=90, rating=4, reviews=1)
-        schedule1 = Schedule(schedule_id = 2, park_id=90, user_id= 2,start_time="2018-06-06 16:00:00",  end_time="2018-06-06 19:00:00")
-        schedule2 = Schedule(schedule_id = 3, park_id=90, user_id= 3,start_time="2018-06-07 13:00:00",  end_time="2018-06-06 15:00:00")
+        schedule1 = Schedule(schedule_id = 2, park_id=90, user_id= 2,start_time="2018-06-10 16:00:00",  end_time="2018-06-10 19:00:00")
+        schedule2 = Schedule(schedule_id = 3, park_id=90, user_id= 3,start_time="2018-06-10 13:00:00",  end_time="2018-06-10 15:00:00")
 
         db.session.add(park1)
         db.session.add(park2)
@@ -194,7 +194,7 @@ class FlaskTestsBasic(TestCase):
         """Test if date is in right format"""
 
         result = self.client.get('/schedule/90/schedule.json', query_string = {"start_date": "Fri Jun 01 2018 12:00:00 GMT-0700 (PDT)", "end_date": "Fri Jun 01 2018 13:00:00 GMT-0700 (PDT)"})
-        self.assertIn("reschedule",result.data)
+        self.assertIn("Incorrect data",result.data)
 
     def test_schedule_feature(self):
         """Test schedule"""
@@ -212,7 +212,7 @@ class FlaskTestsBasic(TestCase):
         """Test schedule suggestion query"""
 
         result = self.client.get('/schedule/90/schedule.json', query_string = {"start_date": "Wed Jun 07 2018 16:00:00 GMT-0700 (PDT)", "end_date": "Wed Jun 07 2018 19:00:00 GMT-0700 (PDT)"},follow_redirects=True)
-        self.assertIn("0",result.data )
+        self.assertIn("Incorrect",result.data )
  
 
 

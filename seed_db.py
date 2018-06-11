@@ -27,18 +27,18 @@ from server import app
 # 	db.session.commit()
 
 
-def load_parks():
+def load_parks(): #pragma: no cover
 	"""Load parks from park_data into database"""
 
 
-	Park.query.delete()
+	Park.query.delete() #pragma: no cover
 
-	with open('park_Info.csv','rb') as csvfile:
+	with open('park_Info.csv','rb') as csvfile: #pragma: no cover
 
-		park_records = csv.reader(csvfile)
+		park_records = csv.reader(csvfile)#pragma: no cover
 		
 
-		for row in park_records:
+		for row in park_records:#pragma: no cover
 			parkname,manager,email,phone,zipcode,address,latitude,longitude = row
 			park = Park(parkname=parkname,manager=manager,email=email,phone=phone,zipcode=zipcode,location=address,latitude = latitude,longitude = longitude)
 
@@ -66,12 +66,12 @@ def load_parks():
 # 	db.session.commit() 
 
 
-def seed_user_datas(fake):
+def seed_user_datas(fake):#pragma: no cover
     """ Seed fake datas in database"""
 
 
-    for i in range(30):
-        user = User(username=fake.user_name(), email = fake.email(), password = 'Test123$', zipcode = fake.zipcode())
+    for i in range(30):#pragma: no cover
+        user = User(username=fake.user_name(), email = fake.email(), password = 'Test123$', zipcode = fake.zipcode())#pragma: no cover
     #     db.session.add(user)
     # db.session.commit()
 
@@ -82,8 +82,8 @@ def seed_user_datas(fake):
      #    end_time = start_time + timedelta(hours=3)
      #    sche = Schedule(user_id = randint(1,30), park_id = randint(1,100),start_time = start_time, end_time = end_time) 
      #    print "@@@@@@@@@@@@@@@@@"
-        db.session.add(user)
-    db.session.commit()
+        db.session.add(user)#pragma: no cover
+    db.session.commit()#pragma: no cover
 def seed_schedule_datas(fake):
 
     for i in range(1000,3000):

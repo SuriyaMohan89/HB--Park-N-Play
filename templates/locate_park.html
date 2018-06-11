@@ -4,6 +4,7 @@
 
 {% block content %}
 <style type="text/css">
+html { overflow-y: hidden}
 	#map{height : 500px;
 		}
 </style>
@@ -13,12 +14,12 @@
 
     <div class="row" style="padding-top:5%">
     	<div class="col-4" style="width: 200px;">
-		<h3>Parks In The Zipcode</h3>
 
 		<ul>
 		{% if locatepark %}
-		{% for park in locatepark %}<br>
-			<li> {{ park.parkname}} {{ park.location }}
+		<h3>Parks In The Zipcode</h3>
+		{% for park in locatepark %}
+			<li> {{ park.parkname}} <br> {{ park.location }}
 			<!-- <div id="locate"> </div> -->
 			<input type="hidden" class="coordinates" value= "{{ park.latitude }} {{ park.longitude }} {{ park.parkname }}" >
 
