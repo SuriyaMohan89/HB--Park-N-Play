@@ -7,6 +7,13 @@
 html { overflow-y: hidden}
 	#map{height : 500px;
 		}
+		h3{
+			font-family: cursive;
+		}
+		li{
+			color: darkgreen;
+			font-family: cursive;
+		}
 </style>
 <div class = "container-fluid" style="height: 1000px">
 	 <!-- <div class="container"> -->
@@ -17,9 +24,9 @@ html { overflow-y: hidden}
 
 		<ul>
 		{% if locatepark %}
-		<h3>Parks In The Zipcode</h3>
+		<h3>Parks In The Zipcode</h3><br>
 		{% for park in locatepark %}
-			<li> {{ park.parkname}} <br> {{ park.location }}
+			<li><b>{{ park.parkname}}</b><br>{{ park.location }}</li><br>
 			<!-- <div id="locate"> </div> -->
 			<input type="hidden" class="coordinates" value= "{{ park.latitude }} {{ park.longitude }} {{ park.parkname }}" >
 

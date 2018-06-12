@@ -3,10 +3,20 @@
 {% block content %}
 <style type="text/css">
   html { overflow-y: hidden}
+  .register-box {
+    margin-top: 2rem;
+    background-color: #e03545;
+    border-color: coral;
+    color:#0e4121;
+    padding: 20px;
+    border-width: medium;
+   border: 4px solid #3bbf59;
+
+}
 </style>
 <div class = "container-fluid" style="height:950px">
-
-<h4>Select Park By Zipcode</h4> 
+<div class="col-7 register-box rounded mx-auto">
+<h4>Schedule Play Time</h4> 
 
 
 <div id ="Reschedule"></div>
@@ -15,11 +25,12 @@
 <input id = "parkid" type="text" value="{{ park_id }}" hidden>
 
 <form >
-	<h3> Choose Date</h3>
-   <input type="date" id="date" data-format="DD-MM-YYYY ">
+	<center><h3> Select Date</h3>
+   <input type="date" id="date" data-format="DD-MM-YYYY "></center>
 
 <br><br>
-<H4>Choose Start Time</H4>
+<center>
+<h3>Select Start Time</h3>
 <div>
  <select id ="starttime">
   <option value="09:00">09:00</option>
@@ -33,10 +44,10 @@
   <option value="17:00">17:00</option>
   <option value="18:00">18:00</option>
   <option value="19:00">19:00</option>
-</select><br><br>
+</select><br><br></div></center>
 
-
-<H4>Choose End Time</H4>
+<center>
+<h3>Select End Time</h3>
 <div>
  <select id="endtime">
   <option value="10:00">10:00</option>
@@ -55,6 +66,7 @@
 <input id ="submitform" type = "submit" value="submit">
 </div>
 </form><br><br>
+</div></center>
 
 
 
@@ -72,7 +84,7 @@
     }
     if ((results != "reschedule") && (results > 0)) {
     $("#Reschedule").empty()
-    $("#ScheduleCount").html(`<p> You have ${results} many children playing at that time</p>`)
+    $("#ScheduleCount").html(`<h1 style="font-family:cursive">Hurray!!! You have ${results} children playing at that time</h1>`)
   }
 }
 

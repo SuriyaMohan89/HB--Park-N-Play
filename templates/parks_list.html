@@ -7,14 +7,34 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #81dfa9;
+    border: 3px solid #0f2b4a;
+}
+h3{
+	color:darkblue;
+	font-family: cursive;
+}
+h4{
+	color:#f82c16;
+}
+a{
+	color:#2b29cd;;
+}
 .checked {
     color: orange;
 }
 </style>
 
-<h3>Parks</h3>
-<h3> Click Link To Rate A Park</h3>
-<div class="col-4">
+<!-- <h3>Parks</h3> -->
+<h3>Click Link To Rate A Park</h3><br>
+<div class="col-5">
 <ul class="list-group">
 	{% for zipcode in zipcodes %}
 	<h4><b>{{ zipcode}}</b></h4>

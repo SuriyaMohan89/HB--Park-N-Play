@@ -8,6 +8,22 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <style>
+            .register-box {
+
+            margin-top: 2rem;
+            background-color: #e03545;
+            border-color: coral;
+            color:#0e4121;
+            padding: 20px;
+            border: white;
+            border-width: medium;
+           border: 2px solid #A43C4C;
+
+        }
+                h3{
+          color:darkblue;
+          font-family: cursive;
+        }
         .stars {
           /* remove inline-block whitespace */
           font-size: 0;
@@ -36,7 +52,7 @@
         }
         .stars > input:checked ~ label:before, .stars > input + label:hover ~ label:before, .stars > input + label:hover:before {
           content: "★";
-          color: #e52;
+          color: darkblue;
           text-shadow: 0 0 1px #333;
         }
         .stars > .stars-clear + label {
@@ -48,7 +64,7 @@
         }
         .stars:hover > input + label:before {
           content: "☆";
-          color: #888;
+          color: darkgreen;
           text-shadow: none;
         }
         .stars:hover > input + label:hover ~ label:before, .stars:hover > input + label:hover:before {
@@ -56,13 +72,13 @@
           color: yellow;
           text-shadow: 0 0 1px #333;
         }
+        button,input{
+          background-color: gold;
+        }
     </style>
+<div class="col-5 register-box rounded mx-auto">
 
-<h3> Add Ratings </h3>
-
-<h1> {{ park.parkname}}</h1>
-
-
+<h2> {{ park.parkname}}</h2>
 
 <h4> Rate for cleanliness</h4>
 <form action="/parks/{{ park.park_id }}/edit">
@@ -99,11 +115,12 @@
 	<input type="radio" id="field-id-1-2" data-id="field-id" name="maintainscore" value="1" /><label for="field-id-1-2"></label>
 
 </span>
-	<br><br>
-	<input type="submit" value="Submit">
+	<br><br><center>
+	<input type="submit" value="Submit"></center>
 </form>
 
 
+</div>
 </div>
 
 {% endblock %}

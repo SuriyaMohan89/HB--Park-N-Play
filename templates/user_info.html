@@ -2,12 +2,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style type="text/css">
+	button, input, optgroup, select, textarea {
+    color: white;
+    margin: 0;
+    font-family: cursive;
+    font-size: inherit;
+    line-height: inherit;
+    background-color: #2f842fbf;
+    border-color: coral;
+}
+</style>
+
 
 <div class = "container-fluid" style="height:950px">
 
 <div id="EmptyZip"> </div>
-<button id ="report" type = "button"> REPORT</button>
-<button id="schedule" type = "button"  > SCHEDULE </button>
+<center><button id ="report" type = "button"> REPORT</button>
+<button id="schedule" type = "button"  > SCHEDULE </button></center>
 <div class="contactManager"> </div>
 <div class="scheduleEvent"></div>
 <br><br>
@@ -73,7 +85,7 @@
 		$('#schedule_result').empty();
 		$(".scheduleEvent").empty();
 
-		$(".contactManager").html("<h2> Report Any Complaints Finding Manager Contact Info</h2><h4> Search park by zipcode </h4>  <form id ='getInfo' method='get' action='/login.json'>  <label> Please Enter Zipcode </label>  <input type = 'text' id = 'zipcode' name = 'zipcode' pattern='[0-9]{5}''>  <br> <br>  <input  id='zipcode-form' type='submit' value = 'submit'>  </form>  <br>  <br>");
+		$(".contactManager").html("<br><h2> Report Any Complaints </h2><br>  <form id ='getInfo' method='get' action='/login.json'>  <label> Please Enter Zipcode </label>  <input type = 'text' id = 'zipcode' name = 'zipcode' pattern='[0-9]{5}''><br><br><input  id='zipcode-form' type='submit' value = 'submit'>  </form> ");
 
 		let formSubmit = document.querySelector('#zipcode-form');
 		formSubmit.addEventListener("click", sendZipcode);
@@ -113,7 +125,7 @@
 		$('#report_result').empty();
 		$('#schedule_result').empty();
 		
-		$(".scheduleEvent").html("<h2> Searck park for schedule</h2><h4> Search park by zipcode </h4> <form id ='getInfo1' method='get' action='/login.json'>  <label> Please Enter Zipcode </label> <input type = 'text' id = 'zipcode' name = 'zipcode' pattern='[0-9]{5}''>  <br> <br>  <input  id='zipcode-form1' type='submit' value = 'submit'>  </form>  <br><br>");
+		$(".scheduleEvent").html("<br><h4> Search park to Schedule </h4> <br><form id ='getInfo1' method='get' action='/login.json'>  <label> Please Enter Zipcode </label> <input type = 'text' id = 'zipcode' name = 'zipcode' pattern='[0-9]{5}''>  <br> <br>  <input  id='zipcode-form1' type='submit' value = 'submit'>  </form>");
 
 		let formSchedule = document.querySelector("#zipcode-form1");
 		formSchedule.addEventListener("click",sendZipcode1)
