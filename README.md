@@ -36,7 +36,7 @@ Its not yet containerized, but should be trivial to do so. And you can deploy wi
 
 
 ### Screenshots
-[HomeScreen](https://drive.google.com/file/d/1n0IbmM5kUjYnzRcaYbYa1uGIS0V86L3n/view "Home Screen")
+!(screenshot/homepage.png "Homepage with casserole images")
 
 ### Contact
 For any feedback/suggestions, please feel free to contact suriya.selu@gmail.com
