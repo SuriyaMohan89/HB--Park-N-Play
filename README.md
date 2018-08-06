@@ -35,8 +35,22 @@ You should be good to go. Check `localhost:5000`
 Its not yet containerized, but should be trivial to do so. And you can deploy with kubernates/docker-swarm or just as a standalone app in GCP/DigitalOcean, etc...
 
 
-### Screenshots
-![2018 JUNE](HB--Park-N-Play/screenshot/Conatct Info - Manager.png.png "Homepage with casserole images")
+# Demo
+[![Watch the video](https://user-images.githubusercontent.com/36581704/43699886-72373bb0-9905-11e8-8e7c-51dc683276a3.png)](https://www.youtube.com/watch?v=oQxmZ_NqKuQ)
+
+## Screenshots
+
+Some screenshots. There are more pages, but showing some glimpse of it. Please do watch the 1 minute demo video below.
+
+### Search parks
+<img width="1471" alt="screen shot 2018-06-09 at 4 20 23 pm" src="https://user-images.githubusercontent.com/36581704/43699923-9e95645c-9905-11e8-8220-a09665011932.png">
+
+## Park ratings
+<img width="611" alt="screen shot 2018-06-09 at 4 21 12 pm" src="https://user-images.githubusercontent.com/36581704/43699938-ad1ffc76-9905-11e8-935c-6b930eb006dd.png">
+
+## Rate parks
+<img width="595" alt="screen shot 2018-06-09 at 4 21 24 pm" src="https://user-images.githubusercontent.com/36581704/43699966-cad18d7a-9905-11e8-8cd2-604314caa112.png">
+
 
 ### Contact
 For any feedback/suggestions, please feel free to contact suriya.selu@gmail.com
